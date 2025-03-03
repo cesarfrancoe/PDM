@@ -30,10 +30,10 @@ La aplicación debe implementar las siguientes funcionalidades:
 
 ### **Pantalla de Evaluación**
 - Se muestra un **color de fondo** que cambia en cada pregunta.  
-- Se presentan **4 opciones** de nombres de color como botones (`RadioButton`).  
+- Se presentan **4 opciones** de nombres de color como botones.  
 - El usuario selecciona la opción que considera correcta.  
 - Botón "Siguiente" para pasar a la siguiente pregunta.  
-- Las respuestas se registran en **memoria temporal** (`ArrayList`).  
+- Las respuestas se registran en **memoria temporal**.  
 - Todos los textos deben tener soporte para inglés y español.  
 
 ### **Pantalla de Resultados**
