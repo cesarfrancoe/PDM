@@ -50,66 +50,48 @@ Cada pregunta debe mostrar un color de fondo con valores RGB específicos.
 ### **Evaluación Rojo ↔ Verde (Daltonismo Rojo-Verde)**
 #### **Colores mostrados y errores esperados**  
 
-| Color (RGB) | Nombre Correcto | Opciones Incorrectas (Errores esperados) |
-|------------|----------------|--------------------------------|
-| (255, 0, 0) | Rojo / Red | Verde, Marrón, Amarillo |
-| (200, 0, 0) | Rojo / Red | Verde, Marrón, Amarillo |
-| (150, 0, 0) | Rojo / Red | Verde, Marrón, Amarillo |
-| (0, 255, 0) | Verde / Green | Rojo, Marrón, Amarillo |
-| (0, 200, 0) | Verde / Green | Rojo, Marrón, Amarillo |
-| (0, 150, 0) | Verde / Green | Rojo, Marrón, Amarillo |
-| (255, 255, 0) | Amarillo / Yellow | Verde, Marrón, Blanco |
-| (200, 200, 0) | Amarillo / Yellow | Verde, Marrón, Blanco |
-| (150, 150, 0) | Amarillo / Yellow | Verde, Marrón, Blanco |
-| (139, 69, 19) | Marrón / Brown | Rojo, Verde, Amarillo |
-| (120, 50, 10) | Marrón / Brown | Rojo, Verde, Amarillo |
-| (100, 40, 5) | Marrón / Brown | Rojo, Verde, Amarillo |
-
-### **Errores comunes:**  
-- Un daltónico rojo-verde confunde **rojo con marrón** o **verde con amarillo**.  
+| Color (RGB) | Hexadecimal | Nombre Correcto | Opciones Incorrectas (Errores esperados) | Visualización |
+|------------|------------|----------------|--------------------------------|--------------|
+| (255, 0, 0) | `#FF0000` | Rojo / Red | Verde, Marrón, Amarillo | 🟥 |
+| (200, 0, 0) | `#C80000` | Rojo / Red | Verde, Marrón, Amarillo | 🟥 |
+| (150, 0, 0) | `#960000` | Rojo / Red | Verde, Marrón, Amarillo | 🟥 |
+| (0, 255, 0) | `#00FF00` | Verde / Green | Rojo, Marrón, Amarillo | 🟩 |
+| (0, 200, 0) | `#00C800` | Verde / Green | Rojo, Marrón, Amarillo | 🟩 |
+| (0, 150, 0) | `#009600` | Verde / Green | Rojo, Marrón, Amarillo | 🟩 |
+| (255, 255, 0) | `#FFFF00` | Amarillo / Yellow | Verde, Marrón, Blanco | 🟨 |
+| (200, 200, 0) | `#C8C800` | Amarillo / Yellow | Verde, Marrón, Blanco | 🟨 |
+| (150, 150, 0) | `#969600` | Amarillo / Yellow | Verde, Marrón, Blanco | 🟨 |
+| (139, 69, 19) | `#8B4513` | Marrón / Brown | Rojo, Verde, Amarillo | 🟫 |
+| (120, 50, 10) | `#783214` | Marrón / Brown | Rojo, Verde, Amarillo | 🟫 |
+| (100, 40, 5) | `#642805` | Marrón / Brown | Rojo, Verde, Amarillo | 🟫 |
 
 ---
 
 ### **Evaluación Azul ↔ Amarillo (Daltonismo Azul-Amarillo)**
 #### **Colores mostrados y errores esperados**  
 
-| Color (RGB) | Nombre Correcto | Opciones Incorrectas (Errores esperados) |
-|------------|----------------|--------------------------------|
-| (0, 0, 255) | Azul / Blue | Violeta, Verde, Negro |
-| (0, 0, 200) | Azul / Blue | Violeta, Verde, Negro |
-| (0, 0, 150) | Azul / Blue | Violeta, Verde, Negro |
-| (255, 255, 0) | Amarillo / Yellow | Verde, Blanco, Rojo |
-| (200, 200, 0) | Amarillo / Yellow | Verde, Blanco, Rojo |
-| (150, 150, 0) | Amarillo / Yellow | Verde, Blanco, Rojo |
-| (128, 0, 128) | Violeta / Violet | Azul, Gris, Negro |
-| (100, 0, 100) | Violeta / Violet | Azul, Gris, Negro |
-| (75, 0, 75) | Violeta / Violet | Azul, Gris, Negro |
-| (0, 255, 255) | Cian / Cyan | Azul, Verde, Blanco |
-| (0, 200, 200) | Cian / Cyan | Azul, Verde, Blanco |
-| (0, 150, 150) | Cian / Cyan | Azul, Verde, Blanco |
-
-### **Errores comunes:**  
-- Un daltónico azul-amarillo confunde **azul con violeta** y **amarillo con verde**.  
+| Color (RGB) | Hexadecimal | Nombre Correcto | Opciones Incorrectas (Errores esperados) | Visualización |
+|------------|------------|----------------|--------------------------------|--------------|
+| (0, 0, 255) | `#0000FF` | Azul / Blue | Violeta, Verde, Negro | 🟦 |
+| (0, 0, 200) | `#0000C8` | Azul / Blue | Violeta, Verde, Negro | 🟦 |
+| (0, 0, 150) | `#000096` | Azul / Blue | Violeta, Verde, Negro | 🟦 |
+| (255, 255, 0) | `#FFFF00` | Amarillo / Yellow | Verde, Blanco, Rojo | 🟨 |
+| (200, 200, 0) | `#C8C800` | Amarillo / Yellow | Verde, Blanco, Rojo | 🟨 |
+| (150, 150, 0) | `#969600` | Amarillo / Yellow | Verde, Blanco, Rojo | 🟨 |
 
 ---
 
 ### **Evaluación de Percepción General (Daltonismo Total)**
 #### **Colores mostrados y errores esperados**  
 
-| Color (RGB) | Nombre Correcto | Opciones Incorrectas (Errores esperados) |
-|------------|----------------|--------------------------------|
-| (255, 255, 255) | Blanco / White | Amarillo, Gris, Azul |
-| (200, 200, 200) | Blanco / White | Amarillo, Gris, Azul |
-| (150, 150, 150) | Blanco / White | Amarillo, Gris, Azul |
-| (0, 0, 0) | Negro / Black | Azul, Gris, Marrón |
-| (50, 50, 50) | Negro / Black | Azul, Gris, Marrón |
-| (100, 100, 100) | Negro / Black | Azul, Gris, Marrón |
-| (128, 128, 128) | Gris / Gray | Blanco, Azul, Negro |
-| (100, 100, 100) | Gris / Gray | Blanco, Azul, Negro |
-| (75, 75, 75) | Gris / Gray | Blanco, Azul, Negro |
-
-### **Errores comunes:**  
-- Una persona con **acromatopsia (daltonismo total)** ve todo en **escala de grises** y responde al azar.  
+| Color (RGB) | Hexadecimal | Nombre Correcto | Opciones Incorrectas (Errores esperados) | Visualización |
+|------------|------------|----------------|--------------------------------|--------------|
+| (255, 255, 255) | `#FFFFFF` | Blanco / White | Amarillo, Gris, Azul | ⬜ |
+| (200, 200, 200) | `#C8C8C8` | Blanco / White | Amarillo, Gris, Azul | ⬜ |
+| (150, 150, 150) | `#969696` | Blanco / White | Amarillo, Gris, Azul | ⬜ |
+| (0, 0, 0) | `#000000` | Negro / Black | Azul, Gris, Marrón | ⬛ |
+| (50, 50, 50) | `#323232` | Negro / Black | Azul, Gris, Marrón | ⬛ |
+| (100, 100, 100) | `#646464` | Negro / Black | Azul, Gris, Marrón | ⬛ |
 
 ---
 
@@ -122,8 +104,3 @@ Después de completar todas las preguntas, la aplicación debe analizar la canti
 | **Deuteranomalía/Deuteranopía** (Déficit o ausencia de verde) | Confunde verde con rojo o amarillo con marrón. |
 | **Tritanomalía/Tritanopía** (Déficit o ausencia de azul) | Confunde azul con violeta o amarillo con blanco/gris. |
 | **Acromatopsia (daltonismo total)** | No distingue colores y responde al azar. |
-
----
-
-**📌 Nota:**  
-Se debe implementar **soporte de idiomas** usando `res/values/strings.xml` para inglés y `res/values-es/strings.xml` para español.  
