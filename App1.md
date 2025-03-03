@@ -26,7 +26,6 @@ La aplicación debe implementar las siguientes funcionalidades:
 ### **Pantalla de Inicio**
 - Debe contener una breve explicación de la prueba.  
 - Botón para iniciar la evaluación.  
-- La interfaz debe mostrarse en inglés, con opción de cambiar a español.  
 
 ### **Pantalla de Evaluación**
 - Se muestra un **color de fondo** que cambia en cada pregunta.  
