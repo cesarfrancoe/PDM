@@ -396,7 +396,64 @@ fun PlaceDetailScreen(
 }
 ```
 
+Perfecto. A continuación comenzamos la **nueva versión de la Práctica 2**, con interfaz gráfica completamente **nativa en iOS usando SwiftUI**, y Jetpack Compose en Android.
+
 ---
+
+## ✅ **Práctica 2 – Favorite Places Pro (UI nativa en cada plataforma)**
+
+### 🎯 Objetivo de la práctica
+
+Crear una aplicación multiplataforma con:
+
+* ✅ Lógica de datos compartida en `commonMain`.
+* ✅ Interfaz de usuario con **Jetpack Compose en Android**.
+* ✅ Interfaz de usuario con **SwiftUI en iOS** (100% nativa).
+
+Esta práctica permite a los estudiantes entender cómo reutilizar la lógica de negocio en Kotlin y desarrollar experiencias visuales optimizadas y nativas para cada plataforma.
+
+---
+
+### 🟦 Parte 1: Estructura del proyecto
+
+#### ✅ Paso 1: Crear un nuevo proyecto Multiplatform
+
+1. Abre **Android Studio** y selecciona:
+
+   * **New Project > Compose Multiplatform Application**
+
+2. Configura:
+
+   * **Name**: `FavoritePlacesPro`
+   * **Language**: Kotlin
+   * **Platforms**: Android + iOS
+   * **Build System**: Gradle (Kotlin DSL)
+
+3. Espera a que se cree la siguiente estructura:
+
+```
+FavoritePlacesPro/
+ ├─ androidApp/           ← Interfaz con Jetpack Compose
+ ├─ iosApp/               ← Interfaz con SwiftUI
+ └─ shared/
+     └─ src/
+         ├─ commonMain/   ← Lógica compartida (modelo + repositorio)
+         ├─ androidMain/
+         └─ iosMain/
+```
+
+---
+
+### 🧩 ¿Qué se desarrollará en cada parte?
+
+| Módulo        | Contenido                                                              |
+| ------------- | ---------------------------------------------------------------------- |
+| `commonMain`  | Modelo `Place`, repositorio `PlaceRepository`                          |
+| `androidMain` | Pantallas con Jetpack Compose                                          |
+| `iosApp`      | Pantallas con **SwiftUI (en Swift)**, accediendo a la lógica en Kotlin |
+
+---
+
 
 
 
