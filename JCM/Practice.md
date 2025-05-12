@@ -410,7 +410,7 @@ Crear una aplicación multiplataforma con:
 * ✅ Interfaz de usuario con **Jetpack Compose en Android**.
 * ✅ Interfaz de usuario con **SwiftUI en iOS** (100% nativa).
 
-Esta práctica permite a los estudiantes entender cómo reutilizar la lógica de negocio en Kotlin y desarrollar experiencias visuales optimizadas y nativas para cada plataforma.
+Esta práctica permite entender cómo reutilizar la lógica de negocio en Kotlin y desarrollar experiencias visuales optimizadas y nativas para cada plataforma.
 
 ---
 
@@ -454,7 +454,181 @@ FavoritePlacesPro/
 
 ---
 
+### 🟦 Parte 2: Reutilizar el modelo y el repositorio en `commonMain`
 
+En esta parte, se define toda la lógica compartida en `commonMain`. Esta lógica será reutilizada desde Android (con Jetpack Compose) y desde iOS (con SwiftUI a través de interoperabilidad Kotlin/Native).
 
+---
+
+#### ✅ Paso 1: Crear carpetas en `commonMain`
+
+Ubicación: `shared/src/commonMain/kotlin/`
+
+Crea las siguientes carpetas:
+
+```
+model/
+repository/
+```
+
+---
+
+#### ✅ Paso 2: Crear el archivo `Place.kt`
+
+**Ubicación:** `shared/src/commonMain/kotlin/model/Place.kt`
+**Propósito:** Representa un lugar favorito con su información básica.
+
+```kotlin
+package model
+
+// Data class that represents a Place with its ID, name, description, and city
+data class Place(
+    val id: Int,
+    val name: String,
+    val description: String,
+    val city: String
+)
+```
+
+---
+
+#### ✅ Paso 3: Crear el archivo `PlaceRepository.kt`
+
+**Ubicación:** `shared/src/commonMain/kotlin/repository/PlaceRepository.kt`
+**Propósito:** Almacena los lugares favoritos y expone funciones para consultarlos, agregarlos y eliminarlos.
+
+```kotlin
+package repository
+
+import model.Place
+import kotlin.random.Random
+
+// In-memory repository for managing favorite places
+object PlaceRepository {
+    private val places = mutableListOf<Place>()
+
+    fun getAll(): List<Place> = places
+
+    fun addPlace(name: String, description: String, city: String) {
+        val newPlace = Place(
+            id = Random.nextInt(),
+            name = name,
+            description = description,
+            city = city
+        )
+        places.add(newPlace)
+    }
+
+    fun removePlace(id: Int) {
+        places.removeIf { it.id == id }
+    }
+}
+```
+
+---
+
+### 🟦 Parte 3: Construir la interfaz de usuario en Android (Jetpack Compose)
+
+En esta parte se crea una interfaz moderna con Jetpack Compose utilizando la lógica definida en `commonMain`.
+
+---
+
+#### ✅ Paso 1: Crear carpetas en `androidMain`
+
+Ubicación: `shared/src/androidMain/kotlin/ui/`
+
+Crea:
+
+```
+ui/
+```
+
+---
+
+#### ✅ Paso 2: Crear el archivo `AndroidApp.kt`
+
+**Ubicación:** `shared/src/androidMain/kotlin/ui/AndroidApp.kt`
+**Propósito:** Punto de entrada para la interfaz en Android.
+
+```kotlin
+package ui
+
+import androidx.compose.runtime.Composable
+
+@Composable
+fun AndroidApp() {
+    NavigationHost()
+}
+```
+
+---
+
+#### ✅ Paso 3: Crear las pantallas
+
+Desde aquí se reutilizan las pantallas `HomeScreen`, `AddPlaceScreen` y `PlaceDetailScreen` que ya habíamos desarrollado en la **Práctica 1**, ya que usan componentes de Jetpack Compose compatibles con Android.
+
+---
+
+### 📄 Archivo: `HomeScreen.kt` (Android)
+
+**Ubicación:** `shared/src/androidMain/kotlin/ui/HomeScreen.kt`
+**Propósito:** Muestra una lista de lugares favoritos y permite navegar a detalles o a la pantalla para agregar uno nuevo.
+
+```kotlin
+package ui
+
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import model.Place
+import repository.PlaceRepository
+
+// Main screen showing the list of favorite places in Android
+@Composable
+fun HomeScreen(
+    onAdd: () -> Unit,
+    onDetail: (Place) -> Unit
+) {
+    val places = remember { mutableStateListOf<Place>() }
+
+    // Load the list of places on first composition
+    LaunchedEffect(Unit) {
+        places.clear()
+        places.addAll(PlaceRepository.getAll())
+    }
+
+    Column(Modifier.fillMaxSize().padding(16.dp)) {
+        Text("Favorite Places", style = MaterialTheme.typography.headlineSmall)
+        Spacer(Modifier.height(16.dp))
+
+        LazyColumn(Modifier.weight(1f)) {
+            items(places, key = { it.id }) { place ->
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 4.dp)
+                        .clickable { onDetail(place) }
+                ) {
+                    Column(Modifier.padding(12.dp)) {
+                        Text(place.name, style = MaterialTheme.typography.titleMedium)
+                        Text(place.city, style = MaterialTheme.typography.bodyMedium)
+                    }
+                }
+            }
+        }
+
+        Spacer(Modifier.height(8.dp))
+
+        Button(onClick = onAdd, modifier = Modifier.fillMaxWidth()) {
+            Text("Add New Place")
+        }
+    }
+}
+```
 
 
