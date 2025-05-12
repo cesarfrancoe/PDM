@@ -398,34 +398,6 @@ fun PlaceDetailScreen(
 
 ---
 
-## **Práctica 2 – Favorite Places Pro (con código específico por plataforma)**
-
-### 🎯 Objetivo de la práctica
-
-Crear una nueva versión de la app **Favorite Places**, utilizando el mismo modelo y repositorio de la Práctica 1, pero agregando código específico por plataforma.
-En esta práctica se aprenderá a usar la directiva `expect/actual` para definir un componente cuya implementación varía entre Android e iOS.
-
----
-
-### 🧩 Componente personalizado
-
-Vamos a personalizar el botón para agregar un nuevo lugar:
-
-* En **Android**, se mostrará como un `FloatingActionButton` con un ícono.
-* En **iOS**, se mostrará como un botón rectangular con un emoji.
-
----
-
-FavoritePlacesPro/
- ├─ androidApp/
- ├─ iosApp/
- └─ shared/
-     └─ src/
-         ├─ commonMain/
-         ├─ androidMain/
-         └─ iosMain/
-
-
 
 
 
