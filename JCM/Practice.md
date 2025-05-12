@@ -630,5 +630,318 @@ fun HomeScreen(
     }
 }
 ```
+---
 
+### 📄 Archivo: `AddPlaceScreen.kt` (Android)
 
+**Ubicación:** `shared/src/androidMain/kotlin/ui/AddPlaceScreen.kt`
+**Propósito:** Pantalla con campos para ingresar un nuevo lugar y botones para guardar o cancelar.
+
+```kotlin
+package ui
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import repository.PlaceRepository
+
+// Screen for adding a new place in Android
+@Composable
+fun AddPlaceScreen(onBack: () -> Unit) {
+    var name by remember { mutableStateOf("") }
+    var description by remember { mutableStateOf("") }
+    var city by remember { mutableStateOf("") }
+
+    Column(Modifier.fillMaxSize().padding(16.dp)) {
+        Text("Add Place", style = MaterialTheme.typography.headlineSmall)
+        Spacer(Modifier.height(16.dp))
+
+        OutlinedTextField(
+            value = name,
+            onValueChange = { name = it },
+            label = { Text("Name") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(Modifier.height(8.dp))
+
+        OutlinedTextField(
+            value = description,
+            onValueChange = { description = it },
+            label = { Text("Description") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(Modifier.height(8.dp))
+
+        OutlinedTextField(
+            value = city,
+            onValueChange = { city = it },
+            label = { Text("City") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(Modifier.height(16.dp))
+
+        Button(
+            onClick = {
+                PlaceRepository.addPlace(name, description, city)
+                onBack()
+            },
+            modifier = Modifier.fillMaxWidth(),
+            enabled = name.isNotBlank() && city.isNotBlank()
+        ) {
+            Text("Save")
+        }
+
+        Spacer(Modifier.height(8.dp))
+
+        OutlinedButton(onClick = onBack, modifier = Modifier.fillMaxWidth()) {
+            Text("Cancel")
+        }
+    }
+}
+```
+
+---
+
+### 📄 Archivo: `PlaceDetailScreen.kt` (Android)
+
+**Ubicación:** `shared/src/androidMain/kotlin/ui/PlaceDetailScreen.kt`
+**Propósito:** Muestra los detalles del lugar seleccionado y permite eliminarlo o volver a la pantalla principal.
+
+```kotlin
+package ui
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import model.Place
+import repository.PlaceRepository
+
+// Screen that shows details of a selected place in Android
+@Composable
+fun PlaceDetailScreen(
+    place: Place,
+    onBack: () -> Unit
+) {
+    Column(Modifier.fillMaxSize().padding(16.dp)) {
+        Text("Place Details", style = MaterialTheme.typography.headlineSmall)
+        Spacer(Modifier.height(16.dp))
+
+        Text("Name: ${place.name}", style = MaterialTheme.typography.titleMedium)
+        Text("City: ${place.city}", style = MaterialTheme.typography.bodyMedium)
+        Spacer(Modifier.height(8.dp))
+        Text("Description:", style = MaterialTheme.typography.titleSmall)
+        Text(place.description)
+
+        Spacer(Modifier.height(24.dp))
+
+        Button(
+            onClick = {
+                PlaceRepository.removePlace(place.id)
+                onBack()
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Delete")
+        }
+
+        Spacer(Modifier.height(8.dp))
+
+        OutlinedButton(
+            onClick = onBack,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Back")
+        }
+    }
+}
+```
+
+---
+
+## 🟦 Parte 4: Construir la interfaz de usuario en iOS (SwiftUI)
+
+En esta parte desarrollaremos la interfaz de la App usando **SwiftUI**, accediendo a la lógica escrita en Kotlin (`PlaceRepository`) a través de interoperabilidad Kotlin/Native.
+
+---
+
+### ✅ Paso 1: Abrir `iosApp` en Xcode
+
+1. Desde Android Studio, navega a la carpeta `iosApp`.
+2. Abre el archivo `iosApp.xcodeproj` con **Xcode**.
+3. Asegúrate de que el esquema esté configurado para ejecutarse en un simulador (por ejemplo, iPhone 14).
+
+---
+
+### ✅ Paso 2: Verifica la interop Kotlin ↔ Swift
+
+Al compilar el módulo `shared` con Kotlin/Native, se genera automáticamente un archivo llamado:
+
+```
+shared.h
+```
+
+Este archivo expone las clases y funciones definidas en `commonMain` a Swift.
+
+> Por ejemplo, podrás usar `PlaceRepository.shared.getAll()` desde SwiftUI.
+
+---
+
+### ✅ Paso 3: Crear archivo `ContentView.swift` en `iosApp`
+
+Este será el punto de entrada de la interfaz SwiftUI.
+
+---
+
+### 📄 Archivo: `ContentView.swift`
+
+**Ubicación:** `iosApp/ContentView.swift`
+**Propósito:** Muestra la lista de lugares accediendo a `PlaceRepository` desde SwiftUI. Permite ver detalles y agregar nuevos lugares.
+
+> ⚠️ Para que funcione, asegúrate de que el módulo `shared` esté correctamente vinculado en el target de Xcode, y que `PlaceRepository` esté expuesto desde Kotlin como `PlaceRepository.shared`.
+
+---
+
+```swift
+import SwiftUI
+import shared // Import the Kotlin Multiplatform module
+
+struct ContentView: View {
+    @State private var places: [Place] = []
+
+    var body: some View {
+        NavigationView {
+            List(places, id: \.id) { place in
+                NavigationLink(destination: DetailView(place: place)) {
+                    VStack(alignment: .leading) {
+                        Text(place.name).font(.headline)
+                        Text(place.city).font(.subheadline)
+                    }
+                }
+            }
+            .navigationTitle("Favorite Places")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Add") {
+                        PlaceRepository.shared.addPlace(
+                            name: "New Place",
+                            description: "Description here",
+                            city: "City Name"
+                        )
+                        loadPlaces()
+                    }
+                }
+            }
+        }
+        .onAppear {
+            loadPlaces()
+        }
+    }
+
+    func loadPlaces() {
+        places = PlaceRepository.shared.getAll() as? [Place] ?? []
+    }
+}
+```
+
+---
+
+Este código:
+
+* Importa el módulo `shared` generado por Kotlin Multiplatform.
+* Usa `PlaceRepository.shared` para acceder a los métodos definidos en Kotlin.
+* Muestra los lugares en una `List` de SwiftUI.
+
+---
+
+### 📄 Archivo: `DetailView.swift`
+
+**Ubicación:** `iosApp/DetailView.swift`
+**Propósito:** Muestra los detalles de un lugar y permite eliminarlo usando `PlaceRepository` de Kotlin.
+
+---
+
+```swift
+import SwiftUI
+import shared
+
+struct DetailView: View {
+    let place: Place
+    @Environment(\.presentationMode) var presentationMode
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Name: \(place.name)")
+                .font(.title2)
+            Text("City: \(place.city)")
+                .font(.subheadline)
+            Text("Description:")
+                .font(.headline)
+            Text(place.description)
+                .font(.body)
+
+            Spacer()
+
+            Button(role: .destructive) {
+                PlaceRepository.shared.removePlace(id: place.id)
+                presentationMode.wrappedValue.dismiss()
+            } label: {
+                Text("Delete Place")
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.borderedProminent)
+        }
+        .padding()
+        .navigationTitle("Details")
+    }
+}
+```
+---
+
+## 🧾 Comparación entre las dos prácticas
+
+| Aspecto                           | **Práctica 1** (100% compartida con Jetpack Compose Multiplatform) | **Práctica 2** (UI nativa: Jetpack Compose + SwiftUI) |
+| --------------------------------- | ------------------------------------------------------------------ | ----------------------------------------------------- |
+| **Código reutilizado**            | ✅ Máxima reutilización (UI + lógica)                               | 🔁 Solo la lógica se reutiliza                        |
+| **UI en Android**                 | ✅ Jetpack Compose (nativo)                                         | ✅ Jetpack Compose (nativo)                            |
+| **UI en iOS**                     | ⚠️ No nativa (renderizada con Skia)                                | ✅ 100% nativa (SwiftUI)                               |
+| **Interoperabilidad**             | No requiere                                                        | ✅ Usa Kotlin/Native ↔ Swift                           |
+| **Desempeño visual en iOS**       | ❌ Puede diferir del look & feel de iOS                             | ✅ UI fluida y coherente con el sistema operativo      |
+| **Mantenimiento**                 | ✅ Un solo código para UI y lógica                                  | ⚠️ Dos UIs diferentes por mantener                    |
+| **Curva de aprendizaje**          | ✅ Más simple (todo en Kotlin/Compose)                              | ❌ Más compleja: Kotlin + Swift + interoperabilidad    |
+| **Escalabilidad multiplataforma** | ✅ Alta (desktop, web, etc.)                                        | 🔁 Menor, se requiere reescribir la UI por plataforma |
+
+---
+
+## ✅ **Ventajas de la Práctica 1**
+
+* ✅ Código más sencillo y consistente.
+* ✅ Una sola base de código para lógica y UI.
+* ✅ Menor esfuerzo de desarrollo.
+* ✅ Ideal para equipos pequeños o MVPs.
+* ✅ Fácil mantenimiento y evolución del proyecto.
+
+## ❌ **Desventajas de la Práctica 1**
+
+* ❌ La UI de iOS **no es nativa**: puede sentirse extraña frente a otras apps iOS.
+* ❌ Algunas funciones visuales específicas de iOS pueden ser difíciles o imposibles de replicar.
+* ❌ Depende del renderizado Skia (más consumo de recursos en iOS).
+
+---
+
+## ✅ **Ventajas de la Práctica 2**
+
+* ✅ UI completamente **nativa** en iOS (SwiftUI) y Android (Compose).
+* ✅ Mayor fidelidad visual y de experiencia para cada plataforma.
+* ✅ Acceso sin límites a APIs específicas del sistema operativo.
+* ✅ Profesional y recomendado para productos de calidad superior.
+
+## ❌ **Desventajas de la Práctica 2**
+
+* ❌ Menor reutilización: se duplica la UI.
+* ❌ Requiere conocimiento de Swift y Xcode.
+* ❌ Mayor complejidad técnica (interoperabilidad, sincronización de estados).
+* ❌ Más esfuerzo en mantenimiento.
