@@ -54,3 +54,35 @@ A continuación se detallan los requisitos recomendados por sistema operativo pa
 
 ---
 
+## Generación del proyecto
+
+Para esta práctica se utilizará el generador oficial de JetBrains para crear un proyecto base donde la lógica de negocio es compartida, pero la interfaz gráfica se desarrolla de forma independiente en cada plataforma.
+
+### Pasos para generar el proyecto:
+
+1. Ingresar a la plataforma oficial:
+   [https://kmp.jetbrains.com](https://kmp.jetbrains.com)
+
+2. Completar los siguientes campos:
+
+   * **Project name**: `FavoritePlacesPro`
+   * **Target platforms**: Android e iOS
+   * **UI Implementation**:
+     🔘 *Separate UIs (SwiftUI for iOS, Compose for Android)*
+
+3. Hacer clic en **Download Project**.
+
+4. Extraer el archivo `.zip` descargado y abrir el proyecto con Android Studio:
+   `File > Open` → seleccionar la carpeta extraída.
+
+5. Esperar la sincronización de Gradle.
+   Android Studio configurará automáticamente los módulos:
+
+   * `androidApp` (Jetpack Compose)
+   * `iosApp` (SwiftUI)
+   * `shared` (lógica común entre plataformas)
+
+---
+
+
+
