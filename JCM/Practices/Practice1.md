@@ -125,4 +125,229 @@ Los componentes internos o reutilizables pueden usar sufijos como:
 
 ---
 
+## Implementación paso a paso
+
+### Paso 1: Definición del modelo `Place`
+
+Este modelo representa la estructura básica de un lugar favorito, incluyendo un identificador, un nombre y una descripción.
+
+**Ruta del archivo:**
+`composeApp/src/commonMain/kotlin/org/example/favoriteplaces/model/Place.kt`
+
+```kotlin
+package org.example.favoriteplaces.model
+
+data class Place(
+    val id: Int,
+    val name: String,
+    val description: String
+)
+```
+
+> Este modelo puede extenderse en futuras prácticas para incluir otros atributos como ubicación geográfica o imagen asociada.
+
+---
+
+### Paso 2: Repositorio de datos
+
+Este repositorio contiene una función que devuelve una lista estática de lugares favoritos. Simula una fuente de datos local que en futuras versiones podría conectarse a una base de datos o servicio remoto.
+
+**Ruta del archivo:**
+`composeApp/src/commonMain/kotlin/org/example/favoriteplaces/data/PlaceRepository.kt`
+
+```kotlin
+package org.example.favoriteplaces.data
+
+import org.example.favoriteplaces.model.Place
+
+class PlaceRepository {
+    fun getAllPlaces(): List<Place> {
+        return listOf(
+            Place(1, "Mount Fuji", "Iconic volcano in Japan"),
+            Place(2, "Eiffel Tower", "Famous landmark in Paris"),
+            Place(3, "Grand Canyon", "Impressive natural formation in the USA")
+        )
+    }
+}
+```
+
+> Este repositorio es útil para separar la lógica de datos de la interfaz, facilitando pruebas y mantenimiento del código.
+
+---
+
+### Paso 3: Pantalla principal `HomeScreen`
+
+Esta pantalla es la responsable de mostrar el título de la app y la lista de lugares favoritos utilizando un diseño vertical. Recupera los datos desde el repositorio y los renderiza mediante tarjetas (`PlaceCard`).
+
+**Ruta del archivo:**
+`composeApp/src/commonMain/kotlin/org/example/favoriteplaces/ui/HomeScreen.kt`
+
+```kotlin
+package org.example.favoriteplaces.ui
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import org.example.favoriteplaces.data.PlaceRepository
+
+@Composable
+fun HomeScreen() {
+    val repository = remember { PlaceRepository() }
+    val places = remember { repository.getAllPlaces() }
+
+    Column(modifier = Modifier.padding(16.dp)) {
+        Text(
+            text = "Favorite Places",
+            style = MaterialTheme.typography.headlineMedium
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        places.forEach { place ->
+            PlaceCard(place)
+            Spacer(modifier = Modifier.height(8.dp))
+        }
+    }
+}
+```
+
+> Esta pantalla actúa como punto central de la interfaz. Se puede extender en futuras prácticas para incluir navegación o filtrado.
+
+---
+
+### Paso 4: Componente reutilizable `PlaceCard`
+
+Este componente muestra los datos de un solo lugar dentro de una tarjeta con estilo Material Design. Se utiliza dentro de `HomeScreen` para renderizar cada elemento de la lista.
+
+**Ruta del archivo:**
+`composeApp/src/commonMain/kotlin/org/example/favoriteplaces/ui/PlaceCard.kt`
+
+```kotlin
+package org.example.favoriteplaces.ui
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import org.example.favoriteplaces.model.Place
+
+@Composable
+fun PlaceCard(place: Place) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(12.dp),
+        elevation = CardDefaults.cardElevation(4.dp)
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text(
+                text = place.name,
+                style = MaterialTheme.typography.titleMedium
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = place.description,
+                style = MaterialTheme.typography.bodyMedium
+            )
+        }
+    }
+}
+```
+
+> Este componente es completamente reutilizable y se puede adaptar fácilmente para mostrar otros atributos o estilos personalizados.
+
+---
+
+### Paso 5: Punto de entrada `App.kt`
+
+Este archivo define la función `App()`, que actúa como punto de entrada composable compartido entre Android e iOS. Desde aquí se invoca directamente la pantalla principal `HomeScreen`.
+
+**Ruta del archivo:**
+`composeApp/src/commonMain/kotlin/org/example/favoriteplaces/App.kt`
+
+```kotlin
+package org.example.favoriteplaces
+
+import androidx.compose.runtime.Composable
+import org.example.favoriteplaces.ui.HomeScreen
+
+@Composable
+fun App() {
+    HomeScreen()
+}
+```
+
+> Tanto la aplicación Android como la iOS renderizan esta función como su interfaz inicial, permitiendo que toda la UI esté centralizada en `commonMain`.
+
+---
+
+### Paso 6: Integración en Android e iOS
+
+En esta práctica, no es necesario implementar código específico para cada plataforma. Los módulos `androidApp` e `iosApp` ya están configurados para mostrar directamente la interfaz declarada en `App()`.
+
+#### Android
+
+**Archivo:**
+`androidApp/src/main/java/.../MainActivity.kt`
+
+Este archivo ya incluye el punto de entrada para Android:
+
+```kotlin
+package org.example.favoriteplaces.android
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import org.example.favoriteplaces.App
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            App()
+        }
+    }
+}
+```
+
+#### iOS
+
+**Archivo:**
+`iosApp/iosApp.swift`
+
+Este archivo está preconfigurado con Swift para ejecutar el punto de entrada:
+
+```swift
+import SwiftUI
+import shared
+
+@main
+struct iOSApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView() // usa ComposeUIViewController
+        }
+    }
+}
+```
+
+**`ContentView.swift`**:
+
+```swift
+import shared
+import SwiftUI
+
+struct ContentView: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> UIViewController {
+        return MainViewControllerKt.MainViewController()
+    }
+
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
+}
+```
+
+> Estos archivos ya están listos desde el proyecto generado en [kmp.jetbrains.com](https://kmp.jetbrains.com) y no requieren modificación para esta práctica. Ambos utilizan la función `App()` definida en `commonMain`.
 
