@@ -34,6 +34,7 @@ A continuación se detallan los requisitos recomendados por sistema operativo pa
 * SDK de Android y Kotlin configurados
 
 **Nota:** esta configuración permite desarrollar y probar únicamente la parte Android de la aplicación. No es posible compilar ni ejecutar el módulo iOS (`iosApp`) desde Windows.
+
 **Nota avanzada:** si deseas evitar errores de compilación relacionados con archivos `.swift`, puedes comentar la línea `include(":iosApp")` en el archivo `settings.gradle.kts`. Para mayor estabilidad, también puedes condicionar la configuración de los targets iOS en `shared/build.gradle.kts` verificando que el sistema operativo sea macOS.
 
 ---
@@ -48,6 +49,7 @@ A continuación se detallan los requisitos recomendados por sistema operativo pa
 * SDK de Android y Kotlin configurados
 
 **Nota:** esta configuración permite desarrollar y probar únicamente la parte Android de la aplicación. No es posible compilar ni ejecutar el módulo iOS en sistemas Linux.
+
 **Nota avanzada:** para evitar errores relacionados con iOS, se recomienda comentar `include(":iosApp")` en `settings.gradle.kts` y condicionar la configuración de los targets iOS en `shared/build.gradle.kts` usando `if (System.getProperty("os.name").contains("Mac"))`.
 
 ---
