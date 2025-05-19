@@ -247,7 +247,7 @@ Estas pantallas permiten al usuario ingresar el nombre y la descripción de un n
 #### Android – `AddPlaceScreen.kt`
 
 **Ruta del archivo:**
-`androidApp/src/main/java/org/example/favoriteplaces/android/ui/AddPlaceScreen.kt`
+`composedApp/src/main/java/org/example/favoriteplaces/android/ui/AddPlaceScreen.kt`
 
 ```kotlin
 package org.example.favoriteplaces.android.ui
@@ -371,7 +371,7 @@ Este componente se utiliza dentro de `HomeScreen` (en Android) y `HomeView` (en 
 #### Android – `PlaceRow.kt`
 
 **Ruta del archivo:**
-`androidApp/src/main/java/org/example/favoriteplaces/android/ui/PlaceRow.kt`
+`composeApp/src/main/java/org/example/favoriteplaces/android/ui/PlaceRow.kt`
 
 ```kotlin
 package org.example.favoriteplaces.android.ui
@@ -432,7 +432,7 @@ struct PlaceRow: View {
 #### Android – `HomeScreen.kt` con FAB y `Scaffold`
 
 **Ruta del archivo:**
-`androidApp/src/main/java/org/example/favoriteplaces/android/ui/HomeScreen.kt`
+`composeApp/src/main/java/org/example/favoriteplaces/android/ui/HomeScreen.kt`
 
 ```kotlin
 package org.example.favoriteplaces.android.ui
@@ -540,7 +540,7 @@ Este paso asegura que la ejecución de la app inicie desde las pantallas princip
 #### Android – `MainActivity.kt`
 
 **Ruta del archivo:**
-`androidApp/src/main/java/org/example/favoriteplaces/android/MainActivity.kt`
+`composeApp/src/main/java/org/example/favoriteplaces/android/MainActivity.kt`
 
 ```kotlin
 package org.example.favoriteplaces.android
