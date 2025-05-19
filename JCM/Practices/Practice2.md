@@ -85,67 +85,78 @@ Para esta práctica se utilizará el generador oficial de JetBrains para crear u
 
 ## Estructura del proyecto
 
-El proyecto generado contiene tres módulos principales:
+El proyecto generado contiene los siguientes módulos principales:
 
 ```
 FavoritePlacesPro/
-├── androidApp/           ← Aplicación Android con UI en Jetpack Compose
-├── iosApp/               ← Aplicación iOS con UI en SwiftUI
-└── shared/
-    ├── build.gradle.kts
-    └── src/
-        ├── commonMain/   ← Lógica de negocio común (modelo y repositorio)
-        ├── androidMain/  ← Código específico para Android
-        └── iosMain/      ← Código específico para iOS
+├── composeApp/           ← Aplicación Android con interfaz Jetpack Compose
+├── iosApp/               ← Aplicación iOS con interfaz SwiftUI
+│   ├── iosApp/
+│   └── iosApp.xcodeproj
+└── shared/               ← Módulo compartido (modelo y lógica)
+    ├── src/commonMain/
+    ├── src/androidMain/
+    └── src/iosMain/
 ```
 
 ### Detalles por módulo:
 
-* **`shared/`**: contiene todo el código compartido entre plataformas, incluyendo el modelo `Place` y la clase `PlaceRepository`. Este código está escrito en Kotlin.
-* **`androidApp/`**: contiene la interfaz gráfica de Android implementada con Jetpack Compose.
-* **`iosApp/`**: contiene la interfaz gráfica de iOS desarrollada en SwiftUI. Este módulo incluye archivos `.swift` y requiere Xcode para compilar y probar.
+* **`composeApp/`**: contiene el código de la aplicación Android. Aquí se desarrolla toda la interfaz utilizando Jetpack Compose. Incluye:
 
-> A diferencia de la práctica anterior, en esta estructura se busca aprovechar al máximo los componentes nativos de cada sistema operativo, por lo que no se define una UI común en `commonMain`.
+  * `MainActivity.kt`: actividad principal de Android.
+  * `App.kt`: punto de entrada a la interfaz.
+
+* **`iosApp/`**: contiene la aplicación para iOS. Toda la interfaz se implementa usando SwiftUI, organizada dentro de `iosApp/iosApp`.
+
+* **`shared/`**: contiene la lógica compartida entre plataformas. Se encuentra estructurada en tres carpetas:
+
+  * `commonMain`: definición del modelo `Place` y el repositorio dinámico `PlaceStore`.
+  * `androidMain`: puede incluir código específico para Android (si se requiere).
+  * `iosMain`: puede incluir código específico para iOS (si se requiere).
 
 ---
 
 ## Convención de nombres y organización del código por plataforma
 
-Dado que la interfaz gráfica se implementa por separado en cada sistema operativo, es importante mantener una organización clara en ambos módulos (`androidApp` y `iosApp`).
+Dado que la interfaz gráfica se implementa por separado en cada sistema operativo, se recomienda seguir una convención de nombres coherente en cada plataforma para mantener el código organizado y comprensible.
 
-### En Android (`androidApp`)
+### En Android (`composeApp`)
 
-* Se recomienda usar el sufijo `Screen` para pantallas completas escritas con Jetpack Compose:
+* Los archivos que definen pantallas completas deben usar el sufijo `Screen`, por ejemplo:
 
   * `HomeScreen.kt`
-  * `DetailScreen.kt`
-* Los componentes reutilizables pueden llevar sufijos como `Card`, `Item`, o `Section`:
+  * `AddPlaceScreen.kt`
 
-  * `PlaceCard.kt`
-  * `PlaceItem.kt`
+* Los componentes visuales reutilizables pueden usar el sufijo `Row`, siguiendo el estilo común para listas:
 
-> Esta convención sigue la misma lógica que en la práctica 1, pero se aplica exclusivamente en el módulo `androidApp`.
+  * `PlaceRow.kt`
+
+> Todos los archivos de interfaz en Android se ubican dentro de `composeApp/src/androidMain/kotlin`.
 
 ---
 
 ### En iOS (`iosApp`)
 
-* En SwiftUI es habitual utilizar el sufijo `View` para las estructuras que definen pantallas o componentes de interfaz:
+* Los archivos que definen pantallas completas en SwiftUI deben usar el sufijo `View`, por ejemplo:
 
   * `HomeView.swift`
-  * `PlaceCellView.swift`
+  * `AddPlaceView.swift`
 
-> Aunque Swift permite otras convenciones, `View` es el estándar más extendido y favorece la comprensión inmediata del propósito de cada archivo.
+* Los componentes visuales reutilizables dentro de listas pueden usar el sufijo `Row`:
+
+  * `PlaceRow.swift`
+
+> Todos los archivos de interfaz para iOS se ubican en `iosApp/iosApp`.
 
 ---
 
 ### Código compartido (`shared`)
 
-* El módulo `shared` debe contener únicamente lógica de negocio, modelos de datos y repositorios.
-* Se mantiene la convención de organizar los paquetes por función:
+* El módulo `shared` contiene exclusivamente la lógica de negocio común (modelo y repositorio).
+* Se recomienda organizar el código en subpaquetes:
 
-  * `model` → entidades de datos como `Place.kt`
-  * `data` → acceso a datos como `PlaceRepository.kt`
+  * `model` → para clases como `Place.kt`
+  * `data` → para clases como `PlaceStore.kt`
 
 ---
 
@@ -553,7 +564,7 @@ class MainActivity : ComponentActivity() {
 
 ---
 
-#### 🟩 iOS – `iOSApp.swift`
+#### iOS – `iOSApp.swift`
 
 **Ruta del archivo:**
 `iosApp/iosApp/iOSApp.swift`
