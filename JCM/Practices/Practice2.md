@@ -154,12 +154,14 @@ Dado que la interfaz gráfica se implementa por separado en cada sistema operati
 
 Todo el código en esta sección debe ubicarse dentro del módulo `shared`, específicamente en el subdirectorio `commonMain`.
 
-### Modelo de datos `Place`
+## Implementación paso a paso
 
-Representa un lugar favorito con identificador, nombre y descripción.
+### Paso 1: Definición del modelo `Place`
+
+Este modelo representa la estructura básica de un lugar favorito, incluyendo un identificador, un nombre y una descripción.
 
 **Ruta del archivo:**
-`shared/src/commonMain/kotlin/org/example/favoriteplaces/model/Place.kt`
+`composeApp/src/commonMain/kotlin/org/example/favoriteplaces/model/Place.kt`
 
 ```kotlin
 package org.example.favoriteplaces.model
@@ -171,43 +173,55 @@ data class Place(
 )
 ```
 
+> Este modelo puede extenderse en futuras prácticas para incluir otros atributos como ubicación geográfica o imagen asociada.
+
 ---
 
-### Repositorio `PlaceRepository`
+### Paso 2: Repositorio de datos
 
-Simula una fuente de datos fija. Esta clase puede ser utilizada desde Android y iOS para obtener la misma lista de lugares.
+Este repositorio contiene una función que devuelve una lista estática de lugares favoritos. Simula una fuente de datos local que en futuras versiones podría conectarse a una base de datos o servicio remoto.
 
 **Ruta del archivo:**
-`shared/src/commonMain/kotlin/org/example/favoriteplaces/data/PlaceRepository.kt`
+`composeApp/src/commonMain/kotlin/org/example/favoriteplaces/data/PlaceRepository.kt`
 
 ```kotlin
 package org.example.favoriteplaces.data
 
 import org.example.favoriteplaces.model.Place
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
-class PlaceRepository {
-    fun getAllPlaces(): List<Place> {
-        return listOf(
+object PlaceStore {
+    private val _places = MutableStateFlow(
+        listOf(
             Place(1, "Mount Fuji", "Iconic volcano in Japan"),
             Place(2, "Eiffel Tower", "Famous landmark in Paris"),
             Place(3, "Grand Canyon", "Impressive natural formation in the USA")
         )
+    )
+
+    val places: StateFlow<List<Place>> = _places
+
+    fun addPlace(name: String, description: String) {
+        val current = _places.value
+        val newPlace = Place(
+            id = (current.maxOfOrNull { it.id } ?: 0) + 1,
+            name = name,
+            description = description
+        )
+        _places.value = current + newPlace
     }
 }
 ```
 
-> Esta lógica es reutilizada por ambos entornos de interfaz (Jetpack Compose y SwiftUI) mediante interoperabilidad multiplataforma.
+> Este repositorio es útil para separar la lógica de datos de la interfaz, facilitando pruebas y mantenimiento del código.
 
 ---
 
-## Interfaz de usuario en Android (Jetpack Compose)
+### ✅ Paso 3a: Crear `AddPlaceScreen.kt` (Android)
 
-La interfaz en Android se implementa de forma independiente, pero consume la lógica compartida del módulo `shared`.
-
-### Pantalla principal `HomeScreen.kt`
-
-**Ruta del archivo:**
-`androidApp/src/main/java/org/example/favoriteplaces/android/ui/HomeScreen.kt`
+**Ruta:**
+`androidApp/src/main/java/org/example/favoriteplaces/android/ui/AddPlaceScreen.kt`
 
 ```kotlin
 package org.example.favoriteplaces.android.ui
@@ -217,21 +231,52 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import org.example.favoriteplaces.data.PlaceRepository
+import org.example.favoriteplaces.data.PlaceStore
 
 @Composable
-fun HomeScreen() {
-    val repository = remember { PlaceRepository() }
-    val places = remember { repository.getAllPlaces() }
+fun AddPlaceScreen(onBack: () -> Unit) {
+    var name by remember { mutableStateOf("") }
+    var description by remember { mutableStateOf("") }
 
     Column(modifier = Modifier.padding(16.dp)) {
-        Text("Favorite Places", style = MaterialTheme.typography.headlineMedium)
-
+        Text("New Place", style = MaterialTheme.typography.headlineMedium)
         Spacer(modifier = Modifier.height(16.dp))
 
-        places.forEach { place ->
-            PlaceCard(place)
-            Spacer(modifier = Modifier.height(8.dp))
+        OutlinedTextField(
+            value = name,
+            onValueChange = { name = it },
+            label = { Text("Name") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        OutlinedTextField(
+            value = description,
+            onValueChange = { description = it },
+            label = { Text("Description") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Button(
+            onClick = {
+                if (name.isNotBlank() && description.isNotBlank()) {
+                    PlaceStore.addPlace(name, description)
+                    onBack()
+                }
+            },
+            modifier = Modifier.fillMaxWidth(),
+            enabled = name.isNotBlank() && description.isNotBlank()
+        ) {
+            Text("Save")
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        OutlinedButton(onClick = onBack, modifier = Modifier.fillMaxWidth()) {
+            Text("Cancel")
         }
     }
 }
@@ -239,143 +284,54 @@ fun HomeScreen() {
 
 ---
 
-### Componente reutilizable `PlaceCard.kt`
+### ✅ Paso 3b: Crear `AddPlaceView.swift` (iOS)
 
-**Ruta del archivo:**
-`androidApp/src/main/java/org/example/favoriteplaces/android/ui/PlaceCard.kt`
-
-```kotlin
-package org.example.favoriteplaces.android.ui
-
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import org.example.favoriteplaces.model.Place
-
-@Composable
-fun PlaceCard(place: Place) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
-        elevation = CardDefaults.cardElevation(4.dp)
-    ) {
-        Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = place.name, style = MaterialTheme.typography.titleMedium)
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(text = place.description, style = MaterialTheme.typography.bodyMedium)
-        }
-    }
-}
-```
-
----
-
-### Actividad principal `MainActivity.kt`
-
-**Ruta del archivo:**
-`androidApp/src/main/java/org/example/favoriteplaces/android/MainActivity.kt`
-
-```kotlin
-package org.example.favoriteplaces.android
-
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import org.example.favoriteplaces.android.ui.HomeScreen
-
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            HomeScreen()
-        }
-    }
-}
-```
-
-> Esta implementación aprovecha completamente Jetpack Compose, pero se mantiene aislada del módulo `shared`, reutilizando únicamente los modelos y datos.
-
----
-
-## Interfaz de usuario en iOS (SwiftUI)
-
-En esta práctica, la interfaz de usuario para iOS se implementa directamente con SwiftUI, aprovechando los componentes nativos de Apple. La lógica de negocio proviene del módulo `shared` gracias a la interoperabilidad entre Kotlin/Native y Swift.
-
-### Vista principal `HomeView.swift`
-
-**Ruta del archivo:**
-`iosApp/iosApp/HomeView.swift`
+**Ruta:**
+`iosApp/iosApp/AddPlaceView.swift`
 
 ```swift
 import SwiftUI
 import shared
 
-struct HomeView: View {
-    private let repository = PlaceRepository()
+struct AddPlaceView: View {
+    @Environment(\.dismiss) var dismiss
+
+    @State private var name: String = ""
+    @State private var description: String = ""
 
     var body: some View {
-        let places = repository.getAllPlaces()
+        VStack(alignment: .leading, spacing: 12) {
+            Text("New Place")
+                .font(.title2)
 
-        NavigationView {
-            List(places, id: \.id) { place in
-                PlaceCellView(place: place)
+            TextField("Name", text: $name)
+                .textFieldStyle(.roundedBorder)
+
+            TextField("Description", text: $description)
+                .textFieldStyle(.roundedBorder)
+
+            Spacer()
+
+            Button("Save") {
+                if !name.isEmpty && !description.isEmpty {
+                    PlaceStore.shared.addPlace(name: name, description: description)
+                    dismiss()
+                }
             }
-            .navigationTitle("Favorite Places")
+            .frame(maxWidth: .infinity)
+            .buttonStyle(.borderedProminent)
+
+            Button("Cancel") {
+                dismiss()
+            }
+            .frame(maxWidth: .infinity)
         }
+        .padding()
+        .navigationTitle("Add Place")
     }
 }
 ```
 
 ---
 
-### Componente `PlaceCellView.swift`
-
-**Ruta del archivo:**
-`iosApp/iosApp/PlaceCellView.swift`
-
-```swift
-import SwiftUI
-import shared
-
-struct PlaceCellView: View {
-    let place: Place
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(place.name)
-                .font(.headline)
-            Text(place.description_)
-                .font(.subheadline)
-        }
-        .padding(8)
-    }
-}
-```
-
-> ⚠️ **Nota:** como `description` es una palabra reservada en Swift, Kotlin/Native la expone automáticamente como `description_` cuando se accede desde Swift.
-
----
-
-### Entrada principal `iOSApp.swift`
-
-**Ruta del archivo:**
-`iosApp/iosApp/iOSApp.swift`
-
-```swift
-import SwiftUI
-
-@main
-struct iOSApp: App {
-    var body: some Scene {
-        WindowGroup {
-            HomeView()
-        }
-    }
-}
-```
-
-> Esta estructura permite que la interfaz gráfica de iOS sea totalmente nativa, mientras reutiliza la lógica de negocio escrita en Kotlin.
 
