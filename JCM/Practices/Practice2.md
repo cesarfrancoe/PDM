@@ -67,8 +67,7 @@ Para esta práctica se utilizará el generador oficial de JetBrains para crear u
 
    * **Project name**: `FavoritePlacesPro`
    * **Target platforms**: Android e iOS
-   * **UI Implementation**:
-     🔘 *Separate UIs (SwiftUI for iOS, Compose for Android)*
+   * **UI Implementation**: Do not share UI (use only SwiftUI)
 
 3. Hacer clic en **Download Project**.
 
@@ -154,14 +153,24 @@ Dado que la interfaz gráfica se implementa por separado en cada sistema operati
 
 Todo el código en esta sección debe ubicarse dentro del módulo `shared`, específicamente en el subdirectorio `commonMain`.
 
+Perfecto. A continuación iniciaremos la sección **“Implementación paso a paso”** de la **Práctica 2 – Favorite Places Pro**, con la estructura actualizada, incluyendo:
+
+* `PlaceRow` como componente reutilizable
+* Pantalla `AddPlaceView.swift` y `AddPlaceScreen.kt`
+* Navegación en ambas plataformas
+* FAB en Android
+* Interfaz nativa en cada sistema
+
+---
+
 ## Implementación paso a paso
 
 ### Paso 1: Definición del modelo `Place`
 
-Este modelo representa la estructura básica de un lugar favorito, incluyendo un identificador, un nombre y una descripción.
+Se define la estructura básica de un lugar, con los atributos `id`, `name` y `description`. Este modelo se declara en el módulo compartido `shared` y será reutilizado por las interfaces de Android e iOS.
 
 **Ruta del archivo:**
-`composeApp/src/commonMain/kotlin/org/example/favoriteplaces/model/Place.kt`
+`shared/src/commonMain/kotlin/org/example/favoriteplaces/model/Place.kt`
 
 ```kotlin
 package org.example.favoriteplaces.model
@@ -173,23 +182,23 @@ data class Place(
 )
 ```
 
-> Este modelo puede extenderse en futuras prácticas para incluir otros atributos como ubicación geográfica o imagen asociada.
+> Este modelo será expuesto automáticamente a Swift como `Place`, y su campo `description` será accesible desde Swift como `description_`, ya que `description` es una palabra reservada en ese lenguaje.
 
 ---
 
-### Paso 2: Repositorio de datos
+### Paso 2: Repositorio de datos dinámico `PlaceStore`
 
-Este repositorio contiene una función que devuelve una lista estática de lugares favoritos. Simula una fuente de datos local que en futuras versiones podría conectarse a una base de datos o servicio remoto.
+Este repositorio reemplaza al repositorio estático tradicional. Mantiene una lista observable de lugares mediante un `StateFlow`, lo que permite actualizar la UI en Android automáticamente y acceder a los datos desde Swift en iOS.
 
 **Ruta del archivo:**
-`composeApp/src/commonMain/kotlin/org/example/favoriteplaces/data/PlaceRepository.kt`
+`shared/src/commonMain/kotlin/org/example/favoriteplaces/data/PlaceStore.kt`
 
 ```kotlin
 package org.example.favoriteplaces.data
 
-import org.example.favoriteplaces.model.Place
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import org.example.favoriteplaces.model.Place
 
 object PlaceStore {
     private val _places = MutableStateFlow(
@@ -214,13 +223,19 @@ object PlaceStore {
 }
 ```
 
-> Este repositorio es útil para separar la lógica de datos de la interfaz, facilitando pruebas y mantenimiento del código.
+> Este objeto puede usarse directamente en Compose (con `collectAsState`) y desde Swift como `PlaceStore.shared`.
 
 ---
 
-### ✅ Paso 3a: Crear `AddPlaceScreen.kt` (Android)
+### Paso 3: Pantallas `AddPlaceScreen.kt` y `AddPlaceView.swift` para registrar nuevos lugares
 
-**Ruta:**
+Estas pantallas permiten al usuario ingresar el nombre y la descripción de un nuevo lugar. Al presionar "Guardar", se agrega a la lista observable a través de `PlaceStore`.
+
+---
+
+#### Android – `AddPlaceScreen.kt`
+
+**Ruta del archivo:**
 `androidApp/src/main/java/org/example/favoriteplaces/android/ui/AddPlaceScreen.kt`
 
 ```kotlin
@@ -284,9 +299,9 @@ fun AddPlaceScreen(onBack: () -> Unit) {
 
 ---
 
-### ✅ Paso 3b: Crear `AddPlaceView.swift` (iOS)
+#### iOS – `AddPlaceView.swift`
 
-**Ruta:**
+**Ruta del archivo:**
 `iosApp/iosApp/AddPlaceView.swift`
 
 ```swift
@@ -334,4 +349,171 @@ struct AddPlaceView: View {
 
 ---
 
+### Paso 4: Pantalla Principal
+
+### Componente auxiliar `PlaceRow`
+
+Este componente se utiliza dentro de `HomeScreen` (en Android) y `HomeView` (en iOS) para renderizar de forma uniforme cada elemento de la lista.
+
+---
+
+#### Android – `PlaceRow.kt`
+
+**Ruta del archivo:**
+`androidApp/src/main/java/org/example/favoriteplaces/android/ui/PlaceRow.kt`
+
+```kotlin
+package org.example.favoriteplaces.android.ui
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import org.example.favoriteplaces.model.Place
+
+@Composable
+fun PlaceRow(place: Place) {
+    Column(modifier = Modifier
+        .fillMaxWidth()
+        .padding(8.dp)) {
+        Text(text = place.name, style = MaterialTheme.typography.titleMedium)
+        Spacer(modifier = Modifier.height(2.dp))
+        Text(text = place.description, style = MaterialTheme.typography.bodyMedium)
+    }
+}
+```
+
+---
+
+#### iOS – `PlaceRow.swift`
+
+**Ruta del archivo:**
+`iosApp/iosApp/PlaceRow.swift`
+
+```swift
+import SwiftUI
+import shared
+
+struct PlaceRow: View {
+    let place: Place
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(place.name)
+                .font(.headline)
+            Text(place.description_)
+                .font(.subheadline)
+        }
+        .padding(.vertical, 6)
+    }
+}
+```
+
+> En Swift, `description` se accede como `description_` por ser palabra reservada.
+
+---
+
+### Paso pantallas principales con navegación y lista de lugares
+
+---
+
+#### Android – `HomeScreen.kt` con FAB y `Scaffold`
+
+**Ruta del archivo:**
+`androidApp/src/main/java/org/example/favoriteplaces/android/ui/HomeScreen.kt`
+
+```kotlin
+package org.example.favoriteplaces.android.ui
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import org.example.favoriteplaces.data.PlaceStore
+
+@Composable
+fun HomeScreen() {
+    var showForm by remember { mutableStateOf(false) }
+
+    if (showForm) {
+        AddPlaceScreen(onBack = { showForm = false })
+    } else {
+        val places by PlaceStore.places.collectAsState()
+
+        Scaffold(
+            floatingActionButton = {
+                FloatingActionButton(onClick = { showForm = true }) {
+                    Icon(Icons.Default.Add, contentDescription = "Add Place")
+                }
+            }
+        ) { paddingValues ->
+            Column(
+                modifier = Modifier
+                    .padding(paddingValues)
+                    .padding(16.dp)
+            ) {
+                Text("Favorite Places", style = MaterialTheme.typography.headlineMedium)
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                places.forEach { place ->
+                    PlaceRow(place)
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
+            }
+        }
+    }
+}
+```
+
+---
+
+#### iOS – `HomeView.swift` con `NavigationView` y `.sheet`
+
+**Ruta del archivo:**
+`iosApp/iosApp/HomeView.swift`
+
+```swift
+import SwiftUI
+import shared
+
+struct HomeView: View {
+    @State private var places: [Place] = []
+    @State private var showForm = false
+
+    var body: some View {
+        NavigationView {
+            List(places, id: \.id) { place in
+                PlaceRow(place: place)
+            }
+            .navigationTitle("Favorite Places")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showForm = true
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
+            .onAppear {
+                loadPlaces()
+            }
+            .sheet(isPresented: $showForm, onDismiss: loadPlaces) {
+                AddPlaceView()
+            }
+        }
+    }
+
+    func loadPlaces() {
+        places = PlaceStore.shared.places as? [Place] ?? []
+    }
+}
+```
+
+---
 
