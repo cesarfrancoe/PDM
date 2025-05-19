@@ -159,14 +159,28 @@ Este repositorio contiene una función que devuelve una lista estática de lugar
 package org.example.favoriteplaces.data
 
 import org.example.favoriteplaces.model.Place
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
-class PlaceRepository {
-    fun getAllPlaces(): List<Place> {
-        return listOf(
+object PlaceStore {
+    private val _places = MutableStateFlow(
+        listOf(
             Place(1, "Mount Fuji", "Iconic volcano in Japan"),
             Place(2, "Eiffel Tower", "Famous landmark in Paris"),
             Place(3, "Grand Canyon", "Impressive natural formation in the USA")
         )
+    )
+
+    val places: StateFlow<List<Place>> = _places
+
+    fun addPlace(name: String, description: String) {
+        val current = _places.value
+        val newPlace = Place(
+            id = (current.maxOfOrNull { it.id } ?: 0) + 1,
+            name = name,
+            description = description
+        )
+        _places.value = current + newPlace
     }
 }
 ```
@@ -183,31 +197,24 @@ Esta pantalla es la responsable de mostrar el título de la app y la lista de lu
 `composeApp/src/commonMain/kotlin/org/example/favoriteplaces/ui/HomeScreen.kt`
 
 ```kotlin
-package org.example.favoriteplaces.ui
-
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import org.example.favoriteplaces.data.PlaceRepository
-
 @Composable
-fun HomeScreen() {
-    val repository = remember { PlaceRepository() }
-    val places = remember { repository.getAllPlaces() }
+fun HomeScreen(onAdd: () -> Unit) {
+    val places by PlaceStore.places.collectAsState()
 
     Column(modifier = Modifier.padding(16.dp)) {
-        Text(
-            text = "Favorite Places",
-            style = MaterialTheme.typography.headlineMedium
-        )
+        Text("Favorite Places", style = MaterialTheme.typography.headlineMedium)
 
         Spacer(modifier = Modifier.height(16.dp))
 
         places.forEach { place ->
             PlaceCard(place)
             Spacer(modifier = Modifier.height(8.dp))
+        }
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Button(onClick = onAdd, modifier = Modifier.fillMaxWidth()) {
+            Text("Add Place")
         }
     }
 }
@@ -217,7 +224,75 @@ fun HomeScreen() {
 
 ---
 
-### Paso 4: Componente reutilizable `PlaceCard`
+### Paso 4: Pantalla `AddPlaceScreen`
+
+Esta pantalla permite al usuario ingresar un nuevo lugar a través de un formulario compuesto por campos de texto para el nombre y la descripción. Al presionar el botón "Guardar", se agrega el nuevo lugar a la lista compartida a través de PlaceStore, y se retorna automáticamente a la pantalla principal.
+
+**Ruta del archivo:**
+`composeApp/src/commonMain/kotlin/org/example/favoriteplaces/ui/AddPlaceScreen.kt`
+
+```kotlin
+package org.example.favoriteplaces.ui
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import org.example.favoriteplaces.data.PlaceStore
+
+@Composable
+fun AddPlaceScreen(onBack: () -> Unit) {
+    var name by remember { mutableStateOf("") }
+    var description by remember { mutableStateOf("") }
+
+    Column(modifier = Modifier.padding(16.dp)) {
+        Text("New Place", style = MaterialTheme.typography.headlineMedium)
+        Spacer(modifier = Modifier.height(16.dp))
+
+        OutlinedTextField(
+            value = name,
+            onValueChange = { name = it },
+            label = { Text("Name") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        OutlinedTextField(
+            value = description,
+            onValueChange = { description = it },
+            label = { Text("Description") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Button(
+            onClick = {
+                if (name.isNotBlank() && description.isNotBlank()) {
+                    PlaceStore.addPlace(name, description)
+                    onBack()
+                }
+            },
+            modifier = Modifier.fillMaxWidth(),
+            enabled = name.isNotBlank() && description.isNotBlank()
+        ) {
+            Text("Save")
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        OutlinedButton(onClick = onBack, modifier = Modifier.fillMaxWidth()) {
+            Text("Cancel")
+        }
+    }
+}
+```
+
+---
+
+### Paso 5: Componente reutilizable `PlaceCard`
 
 Este componente muestra los datos de un solo lugar dentro de una tarjeta con estilo Material Design. Se utiliza dentro de `HomeScreen` para renderizar cada elemento de la lista.
 
@@ -261,7 +336,7 @@ fun PlaceCard(place: Place) {
 
 ---
 
-### Paso 5: Punto de entrada `App.kt`
+### Paso 6: Punto de entrada `App.kt`
 
 Este archivo define la función `App()`, que actúa como punto de entrada composable compartido entre Android e iOS. Desde aquí se invoca directamente la pantalla principal `HomeScreen`.
 
@@ -271,12 +346,19 @@ Este archivo define la función `App()`, que actúa como punto de entrada compos
 ```kotlin
 package org.example.favoriteplaces
 
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import org.example.favoriteplaces.ui.AddPlaceScreen
 import org.example.favoriteplaces.ui.HomeScreen
 
 @Composable
 fun App() {
-    HomeScreen()
+    var currentScreen by remember { mutableStateOf("home") }
+
+    if (currentScreen == "home") {
+        HomeScreen(onAdd = { currentScreen = "add" })
+    } else {
+        AddPlaceScreen(onBack = { currentScreen = "home" })
+    }
 }
 ```
 
@@ -284,7 +366,7 @@ fun App() {
 
 ---
 
-### Paso 6: Integración en Android e iOS
+### Paso 7: Integración en Android e iOS
 
 En esta práctica, no es necesario implementar código específico para cada plataforma. Los módulos `androidApp` e `iosApp` ya están configurados para mostrar directamente la interfaz declarada en `App()`.
 
