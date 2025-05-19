@@ -516,4 +516,60 @@ struct HomeView: View {
 ```
 
 ---
+Perfecto. Finalizamos la sección de implementación paso a paso con el **Paso 5: Puntos de entrada en Android e iOS**.
+
+Este paso asegura que la ejecución de la app inicie desde las pantallas principales (`HomeScreen` en Android y `HomeView` en iOS), que ahora incorporan navegación y permiten agregar lugares.
+
+---
+
+### Paso 5: Puntos de entrada en `MainActivity.kt` y `iOSApp.swift`
+
+---
+
+#### Android – `MainActivity.kt`
+
+**Ruta del archivo:**
+`androidApp/src/main/java/org/example/favoriteplaces/android/MainActivity.kt`
+
+```kotlin
+package org.example.favoriteplaces.android
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import org.example.favoriteplaces.android.ui.HomeScreen
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            HomeScreen()
+        }
+    }
+}
+```
+
+> Esta es la actividad principal de Android. Llama a `HomeScreen`, que ya maneja internamente la navegación hacia `AddPlaceScreen`.
+
+---
+
+#### 🟩 iOS – `iOSApp.swift`
+
+**Ruta del archivo:**
+`iosApp/iosApp/iOSApp.swift`
+
+```swift
+import SwiftUI
+
+@main
+struct iOSApp: App {
+    var body: some Scene {
+        WindowGroup {
+            HomeView()
+        }
+    }
+}
+```
+
+> Esta es la estructura de entrada principal en SwiftUI. Llama a `HomeView`, que contiene la lista de lugares y el acceso al formulario `AddPlaceView`.
 
