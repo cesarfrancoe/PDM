@@ -583,7 +583,13 @@ struct HomeView: View {
     }
 
     func loadPlaces() {
-        places = PlaceStore.shared.places as? [Place] ?? []
+        places = PlaceStore.shared.getPlacesSnapshot() as? [Place] ?? []
+    }
+}
+
+struct HomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeView()
     }
 }
 ```
