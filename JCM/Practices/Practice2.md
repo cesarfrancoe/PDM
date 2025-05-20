@@ -605,20 +605,31 @@ Este paso asegura que la ejecución de la app inicie desde las pantallas princip
 `composeApp/src/main/java/org/example/favoriteplacespro/android/MainActivity.kt`
 
 ```kotlin
-package org.example.favoriteplacespro.android
+package org.example.favoriteplacepro.android
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
 import org.example.favoriteplacespro.android.ui.HomeScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
+
         setContent {
             HomeScreen()
         }
     }
+}
+
+@Preview
+@Composable
+fun AppAndroidPreview() {
+    HomeScreen()
 }
 ```
 
