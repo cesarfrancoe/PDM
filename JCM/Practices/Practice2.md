@@ -602,15 +602,15 @@ Este paso asegura que la ejecución de la app inicie desde las pantallas princip
 #### Android – `MainActivity.kt`
 
 **Ruta del archivo:**
-`composeApp/src/main/java/org/example/favoriteplaces/android/MainActivity.kt`
+`composeApp/src/main/java/org/example/favoriteplacespro/android/MainActivity.kt`
 
 ```kotlin
-package org.example.favoriteplaces.android
+package org.example.favoriteplacespro.android
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import org.example.favoriteplaces.android.ui.HomeScreen
+import org.example.favoriteplacespro.android.ui.HomeScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
