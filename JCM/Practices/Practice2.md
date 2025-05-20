@@ -495,6 +495,18 @@ struct PlaceRow: View {
 `composeApp/src/main/java/org/example/favoriteplacespro/android/ui/HomeScreen.kt`
 
 ```kotlin
+package org.example.favoriteplacespro.android.ui
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import org.example.favoriteplacespro.data.PlaceStore
+import org.example.favoriteplacespro.model.Place
+
 @Composable
 fun HomeScreen() {
     var showForm by remember { mutableStateOf(false) }
