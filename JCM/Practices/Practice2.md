@@ -66,7 +66,7 @@ Para esta práctica se utilizará el generador oficial de JetBrains para crear u
 2. Completar los siguientes campos:
 
    * **Project Name**: `FavoritePlacesPro`
-   * **Project ID**: `org.example.android.favoriteplacepro`
+   * **Project ID**: `org.example.favoriteplacepro.android`
    * **Target platforms**: Android y iOS
    * **UI Implementation**: Do not share UI (use only SwiftUI)
 
