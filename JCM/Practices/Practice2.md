@@ -160,21 +160,48 @@ Dado que la interfaz gráfica se implementa por separado en cada sistema operati
 
 ---
 
-## Implementación del modelo y repositorio en `shared`
-
-Todo el código en esta sección debe ubicarse dentro del módulo `shared`, específicamente en el subdirectorio `commonMain`.
-
-Perfecto. A continuación iniciaremos la sección **“Implementación paso a paso”** de la **Práctica 2 – Favorite Places Pro**, con la estructura actualizada, incluyendo:
-
-* `PlaceRow` como componente reutilizable
-* Pantalla `AddPlaceView.swift` y `AddPlaceScreen.kt`
-* Navegación en ambas plataformas
-* FAB en Android
-* Interfaz nativa en cada sistema
+## Implementación paso a paso
 
 ---
 
-## Implementación paso a paso
+## Organización del código
+
+Antes de comenzar con la implementación, asegúrate de crear las siguientes carpetas (si no existen), para mantener una organización limpia del proyecto:
+
+### En `shared` (código común)
+
+```
+shared/
+└── src/
+    └── commonMain/
+        └── kotlin/
+            └── org/
+                └── example/
+                    └── favoriteplaces/
+                        ├── model/      ← Aquí se ubica Place.kt
+                        └── data/       ← Aquí se ubica PlaceStore.kt
+```
+
+### En `composeApp` (interfaz de Android)
+
+```
+composeApp/
+└── src/
+    └── androidMain/
+        └── kotlin/
+            └── org/
+                └── example/
+                    └── favoriteplaces/
+                        └── android/
+                            └── ui/     ← Aquí van HomeScreen.kt, AddPlaceScreen.kt, PlaceRow.kt
+```
+
+> Las carpetas pueden crearse directamente desde Android Studio (New > Package) o desde el explorador de archivos.
+
+---
+
+¿Deseas que te entregue esta sección integrada al inicio de `Practice2.md` o prefieres hacerlo manualmente?
+
 
 ### Paso 1: Definición del modelo `Place`
 
