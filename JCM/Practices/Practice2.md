@@ -606,7 +606,7 @@ struct HomeView_Previews: PreviewProvider {
 `composeApp/src/main/java/org/example/favoriteplacespro/android/MainActivity.kt`
 
 ```kotlin
-package org.example.favoriteplacepro.android
+package org.example.favoriteplacespro.android
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
