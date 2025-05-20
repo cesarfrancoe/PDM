@@ -379,7 +379,7 @@ fun AddPlaceScreen(onBack: () -> Unit) {
 
 ```swift
 import SwiftUI
-import shared
+import Shared
 
 struct AddPlaceView: View {
     @Environment(\.dismiss) var dismiss
@@ -466,7 +466,7 @@ fun PlaceRow(place: Place) {
 
 ```swift
 import SwiftUI
-import shared
+import Shared
 
 struct PlaceRow: View {
     let place: Place
@@ -552,7 +552,7 @@ fun HomeScreen() {
 
 ```swift
 import SwiftUI
-import shared
+import Shared
 
 struct HomeView: View {
     @State private var places: [Place] = []
@@ -587,11 +587,6 @@ struct HomeView: View {
     }
 }
 ```
-
----
-Perfecto. Finalizamos la sección de implementación paso a paso con el **Paso 5: Puntos de entrada en Android e iOS**.
-
-Este paso asegura que la ejecución de la app inicie desde las pantallas principales (`HomeScreen` en Android y `HomeView` en iOS), que ahora incorporan navegación y permiten agregar lugares.
 
 ---
 
