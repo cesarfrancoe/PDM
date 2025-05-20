@@ -210,10 +210,10 @@ composeApp/
 Se define la estructura básica de un lugar, con los atributos `id`, `name` y `description`. Este modelo se declara en el módulo compartido `shared` y será reutilizado por las interfaces de Android e iOS.
 
 **Ruta del archivo:**
-`shared/src/commonMain/kotlin/org/example/favoriteplaces/model/Place.kt`
+`shared/src/commonMain/kotlin/org/example/favoriteplacespro/model/Place.kt`
 
 ```kotlin
-package org.example.favoriteplaces.model
+package org.example.favoriteplacespro.model
 
 data class Place(
     val id: Int,
@@ -231,14 +231,14 @@ data class Place(
 Este repositorio reemplaza al repositorio estático tradicional. Mantiene una lista observable de lugares mediante un `StateFlow`, lo que permite actualizar la UI en Android automáticamente y acceder a los datos desde Swift en iOS.
 
 **Ruta del archivo:**
-`shared/src/commonMain/kotlin/org/example/favoriteplaces/data/PlaceStore.kt`
+`shared/src/commonMain/kotlin/org/example/favoriteplacespro/data/PlaceStore.kt`
 
 ```kotlin
-package org.example.favoriteplaces.data
+package org.example.favoriteplacespro.data
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import org.example.favoriteplaces.model.Place
+import org.example.favoriteplacespro.model.Place
 
 object PlaceStore {
     private val _places = MutableStateFlow(
@@ -259,6 +259,10 @@ object PlaceStore {
             description = description
         )
         _places.value = current + newPlace
+    }
+
+   func loadPlaces() {
+        places = PlaceStore.shared.getPlacesSnapshot() as? [Place] ?? []
     }
 }
 ```
