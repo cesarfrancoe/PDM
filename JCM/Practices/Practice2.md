@@ -487,9 +487,7 @@ struct PlaceRow: View {
 
 ---
 
-### Paso pantallas principales con navegación y lista de lugares
-
----
+### Pantallas principales con navegación y lista de lugares
 
 #### Android – `HomeScreen.kt` con FAB y `Scaffold`
 
