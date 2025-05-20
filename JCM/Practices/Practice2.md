@@ -182,7 +182,7 @@ shared/
         └── kotlin/
             └── org/
                 └── example/
-                    └── favoriteplaces/
+                    └── favoriteplacespro/
                         ├── model/      ← Aquí se ubica Place.kt
                         └── data/       ← Aquí se ubica PlaceStore.kt
 ```
@@ -196,7 +196,7 @@ composeApp/
         └── kotlin/
             └── org/
                 └── example/
-                    └── favoriteplaces/
+                    └── favoriteplacespro/
                         └── android/
                             └── ui/     ← Aquí van HomeScreen.kt, AddPlaceScreen.kt, PlaceRow.kt
 ```
@@ -204,9 +204,6 @@ composeApp/
 > Las carpetas pueden crearse directamente desde Android Studio (New > Package) o desde el explorador de archivos.
 
 ---
-
-¿Deseas que te entregue esta sección integrada al inicio de `Practice2.md` o prefieres hacerlo manualmente?
-
 
 ### Paso 1: Definición del modelo `Place`
 
