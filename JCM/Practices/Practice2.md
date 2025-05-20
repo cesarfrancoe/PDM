@@ -292,9 +292,7 @@ object PlaceStore {
         _places.value = current + newPlace
     }
 
-   func loadPlaces() {
-        places = PlaceStore.shared.getPlacesSnapshot() as? [Place] ?? []
-    }
+    fun getPlacesSnapshot(): List<Place> = places.value
 }
 ```
 
