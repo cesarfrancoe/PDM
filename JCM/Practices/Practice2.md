@@ -77,7 +77,7 @@ Para esta práctica se utilizará el generador oficial de JetBrains para crear u
 5. Esperar la sincronización de Gradle.
    Android Studio configurará automáticamente los módulos:
 
-   * `androidApp` (Jetpack Compose)
+   * `composeApp` (Jetpack Compose)
    * `iosApp` (SwiftUI)
    * `shared` (lógica común entre plataformas)
 
