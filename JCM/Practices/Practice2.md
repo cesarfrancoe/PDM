@@ -433,17 +433,17 @@ Este componente se utiliza dentro de `HomeScreen` (en Android) y `HomeView` (en 
 #### Android – `PlaceRow.kt`
 
 **Ruta del archivo:**
-`composeApp/src/main/java/org/example/favoriteplaces/android/ui/PlaceRow.kt`
+`composeApp/src/main/java/org/example/favoriteplacespro/android/ui/PlaceRow.kt`
 
 ```kotlin
-package org.example.favoriteplaces.android.ui
+package org.example.favoriteplacespro.android.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import org.example.favoriteplaces.model.Place
+import org.example.favoriteplacespro.model.Place
 
 @Composable
 fun PlaceRow(place: Place) {
@@ -494,10 +494,10 @@ struct PlaceRow: View {
 #### Android – `HomeScreen.kt` con FAB y `Scaffold`
 
 **Ruta del archivo:**
-`composeApp/src/main/java/org/example/favoriteplaces/android/ui/HomeScreen.kt`
+`composeApp/src/main/java/org/example/favoriteplacespro/android/ui/HomeScreen.kt`
 
 ```kotlin
-package org.example.favoriteplaces.android.ui
+package org.example.favoriteplacespro.android.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -506,7 +506,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import org.example.favoriteplaces.data.PlaceStore
+import org.example.favoriteplacespro.data.PlaceStore
 
 @Composable
 fun HomeScreen() {
