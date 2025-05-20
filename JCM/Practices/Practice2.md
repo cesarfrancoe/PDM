@@ -495,26 +495,14 @@ struct PlaceRow: View {
 `composeApp/src/main/java/org/example/favoriteplacespro/android/ui/HomeScreen.kt`
 
 ```kotlin
-package org.example.favoriteplacespro.android.ui
-
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import org.example.favoriteplacespro.data.PlaceStore
-
 @Composable
 fun HomeScreen() {
     var showForm by remember { mutableStateOf(false) }
+    val places = loadPlaces()
 
     if (showForm) {
         AddPlaceScreen(onBack = { showForm = false })
     } else {
-        val places by PlaceStore.places.collectAsState()
-
         Scaffold(
             floatingActionButton = {
                 FloatingActionButton(onClick = { showForm = true }) {
@@ -538,6 +526,12 @@ fun HomeScreen() {
             }
         }
     }
+}
+
+@Composable
+fun loadPlaces(): List<Place> {
+    val state by PlaceStore.places.collectAsState()
+    return state
 }
 ```
 
