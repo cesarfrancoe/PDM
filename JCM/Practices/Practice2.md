@@ -228,7 +228,38 @@ data class Place(
 
 ### Paso 2: Repositorio de datos dinámico `PlaceStore`
 
-Este repositorio reemplaza al repositorio estático tradicional. Mantiene una lista observable de lugares mediante un `StateFlow`, lo que permite actualizar la UI en Android automáticamente y acceder a los datos desde Swift en iOS.
+Este repositorio mantiene una lista observable de lugares mediante un `StateFlow`, lo que permite actualizar la UI en Android automáticamente y acceder a los datos desde Swift en iOS.
+
+Antes de implementar `PlaceStore`, es importante tener en cuenta que este repositorio utiliza **corutinas** y `StateFlow`. Por lo tanto, es necesario realizar una configuración previa en el módulo `shared`.
+
+#### 📌 Configuración previa para usar corutinas (versión moderna con `libs.versions.toml`)
+
+1. Abre el archivo `libs.versions.toml` (ubicado usualmente en `gradle/libs.versions.toml`) y agrega lo siguiente:
+
+```toml
+[versions]
+coroutines = "1.8.0"
+
+[libraries]
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+```
+
+> Si estás usando el formato XML (`libs.versions.xml`), agrega estas entradas de forma equivalente en las secciones `[versions]` y `[libraries]`.
+
+2. Luego, abre el archivo `shared/build.gradle.kts` y asegúrate de incluir la dependencia de corutinas en `commonMain`:
+
+```kotlin
+kotlin {
+    sourceSets {
+        commonMain.dependencies {
+            implementation(libs.kotlinx.coroutines.core)
+        }
+    }
+}
+```
+
+3. Sincroniza el proyecto para aplicar los cambios.
+4. Crear `PlaceStore.kt`.
 
 **Ruta del archivo:**
 `shared/src/commonMain/kotlin/org/example/favoriteplacespro/data/PlaceStore.kt`
