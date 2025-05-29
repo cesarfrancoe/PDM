@@ -1,4 +1,4 @@
-# 📘 Práctica 1: Favorite Places
+# 📘 Práctica 3: Favorite Places
 
 **Interfaz desarrollada con Flutter (Multiplataforma Android & iOS)**
 
