@@ -176,3 +176,201 @@ class PlaceStore extends ChangeNotifier {
 
 ---
 
+### 📝 Paso 3: Pantalla para registrar nuevos lugares (`AddPlaceScreen`)
+
+Esta pantalla permite al usuario agregar un nuevo lugar. Contiene un formulario con campos de texto para el nombre y la descripción. Al presionar el botón “Guardar”, se actualiza el repositorio y se retorna a la pantalla principal.
+
+**Ruta del archivo:**
+`lib/screens/add_place_screen.dart`
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../data/place_store.dart';
+
+class AddPlaceScreen extends StatefulWidget {
+  final VoidCallback onPlaceAdded;
+
+  const AddPlaceScreen({super.key, required this.onPlaceAdded});
+
+  @override
+  State<AddPlaceScreen> createState() => _AddPlaceScreenState();
+}
+
+class _AddPlaceScreenState extends State<AddPlaceScreen> {
+  final _nameController = TextEditingController();
+  final _descController = TextEditingController();
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _descController.dispose();
+    super.dispose();
+  }
+
+  void _savePlace() {
+    final name = _nameController.text.trim();
+    final desc = _descController.text.trim();
+
+    if (name.isNotEmpty && desc.isNotEmpty) {
+      Provider.of<PlaceStore>(context, listen: false).addPlace(name, desc);
+      widget.onPlaceAdded();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('New Place')),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextField(
+              controller: _nameController,
+              decoration: const InputDecoration(labelText: 'Name'),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: _descController,
+              decoration: const InputDecoration(labelText: 'Description'),
+            ),
+            const SizedBox(height: 24),
+            ElevatedButton(
+              onPressed: _savePlace,
+              child: const Text('Save'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Cancel'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+
+---
+
+### 🧩 Paso 4: Componente visual reutilizable (`PlaceRow`)
+
+Este widget representa visualmente un lugar individual. Se utiliza dentro de la pantalla principal para mostrar la lista de lugares.
+
+**Ruta del archivo:**
+`lib/widgets/place_row.dart`
+
+```dart
+import 'package:flutter/material.dart';
+import '../models/place.dart';
+
+class PlaceRow extends StatelessWidget {
+  final Place place;
+
+  const PlaceRow({super.key, required this.place});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(place.name, style: Theme.of(context).textTheme.titleMedium),
+        const SizedBox(height: 4),
+        Text(place.description, style: Theme.of(context).textTheme.bodyMedium),
+      ],
+    );
+  }
+}
+```
+
+---
+
+### 🏠 Paso 5: Pantalla principal (`HomeScreen`)
+
+Esta pantalla muestra el título de la App y la lista completa de lugares. Utiliza `Consumer` para observar el repositorio `PlaceStore` y renderiza la interfaz con un botón flotante para agregar lugares.
+
+**Ruta del archivo:**
+`lib/screens/home_screen.dart`
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../data/place_store.dart';
+import '../widgets/place_row.dart';
+import 'add_place_screen.dart';
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final places = context.watch<PlaceStore>().places;
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('Favorite Places')),
+      body: ListView.separated(
+        padding: const EdgeInsets.all(16),
+        itemCount: places.length,
+        separatorBuilder: (_, __) => const SizedBox(height: 12),
+        itemBuilder: (context, index) {
+          return PlaceRow(place: places[index]);
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => AddPlaceScreen(
+                onPlaceAdded: () => Navigator.pop(context),
+              ),
+            ),
+          );
+        },
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+```
+
+---
+
+### 🏁 Paso 6: Punto de entrada (`main.dart`)
+
+Este archivo configura la aplicación, registra el proveedor `PlaceStore` usando `ChangeNotifierProvider` y define la pantalla inicial (`HomeScreen`).
+
+**Ruta del archivo:**
+`lib/main.dart`
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'data/place_store.dart';
+import 'screens/home_screen.dart';
+
+void main() {
+  runApp(const FavoritePlacesApp());
+}
+
+class FavoritePlacesApp extends StatelessWidget {
+  const FavoritePlacesApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (_) => PlaceStore(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Favorite Places',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
+          useMaterial3: true,
+        ),
+        home: const HomeScreen(),
+      ),
+    );
+  }
+}
+```
