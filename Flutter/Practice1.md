@@ -97,3 +97,82 @@ favorite_places/
 
 > Todo el desarrollo principal se realiza dentro de la carpeta `lib/`.
 
+---
+
+## 🚀 Implementación paso a paso
+
+---
+
+## 📁 Organización del código
+
+Antes de comenzar con la implementación, asegúrate de crear las siguientes carpetas dentro del directorio `lib/` para mantener una estructura clara y modular:
+
+```
+lib/
+├── data/         ← Repositorio y lógica de datos (place_store.dart)
+├── models/       ← Definición del modelo Place (place.dart)
+├── screens/      ← Pantallas principales (home_screen.dart, add_place_screen.dart)
+└── widgets/      ← Componentes visuales reutilizables (place_row.dart)
+```
+
+> Puedes crear estas carpetas desde tu IDE o directamente desde el explorador de archivos.
+
+---
+
+### 🧱 Paso 1: Definición del modelo `Place`
+
+**Ruta del archivo:**
+`lib/models/place.dart`
+
+```dart
+class Place {
+  final int id;
+  final String name;
+  final String description;
+
+  Place({
+    required this.id,
+    required this.name,
+    required this.description,
+  });
+}
+```
+
+> Esta clase representa un lugar favorito. Más adelante se puede extender para incluir otros atributos como ubicación o imagen.
+
+---
+
+### 📦 Paso 2: Repositorio de datos dinámico `PlaceStore`
+
+**Ruta del archivo:**
+`lib/data/place_store.dart`
+
+```dart
+import 'package:flutter/foundation.dart';
+import '../models/place.dart';
+
+class PlaceStore extends ChangeNotifier {
+  final List<Place> _places = [
+    Place(id: 1, name: 'Mount Fuji', description: 'Iconic volcano in Japan'),
+    Place(id: 2, name: 'Eiffel Tower', description: 'Famous landmark in Paris'),
+    Place(id: 3, name: 'Grand Canyon', description: 'Impressive natural formation in the USA'),
+  ];
+
+  List<Place> get places => List.unmodifiable(_places);
+
+  void addPlace(String name, String description) {
+    final newPlace = Place(
+      id: (_places.isNotEmpty ? _places.map((p) => p.id).reduce((a, b) => a > b ? a : b) : 0) + 1,
+      name: name,
+      description: description,
+    );
+    _places.add(newPlace);
+    notifyListeners();
+  }
+}
+```
+
+> Este repositorio utiliza `ChangeNotifier` para actualizar la interfaz automáticamente cuando se agregan nuevos lugares.
+
+---
+
