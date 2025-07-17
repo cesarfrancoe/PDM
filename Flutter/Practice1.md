@@ -1,10 +1,10 @@
-# 📘 Práctica 3: Favorite Places
+# Práctica 3: Favorite Places
 
 **Interfaz desarrollada con Flutter (Multiplataforma Android & iOS)**
 
 ---
 
-## ✅ Requisitos técnicos
+## Requisitos técnicos
 
 A continuación se detallan los requisitos recomendados por sistema operativo para desarrollar esta práctica con Flutter:
 
@@ -48,7 +48,7 @@ A continuación se detallan los requisitos recomendados por sistema operativo pa
 
 ---
 
-## 🧰 Generación del proyecto
+## Generación del proyecto
 
 ### Pasos para generar el proyecto base:
 
@@ -77,7 +77,7 @@ code .    # si usas Visual Studio Code
 
 ---
 
-## 📁 Estructura del proyecto
+## Estructura del proyecto
 
 Después de crear el proyecto, encontrarás una estructura como la siguiente:
 
@@ -99,11 +99,11 @@ favorite_places/
 
 ---
 
-## 🚀 Implementación paso a paso
+## Implementación paso a paso
 
 ---
 
-## 📁 Organización del código
+## Organización del código
 
 Antes de comenzar con la implementación, asegúrate de crear las siguientes carpetas dentro del directorio `lib/` para mantener una estructura clara y modular:
 
@@ -119,7 +119,7 @@ lib/
 
 ---
 
-### 🧱 Paso 1: Definición del modelo `Place`
+### Paso 1: Definición del modelo `Place`
 
 **Ruta del archivo:**
 `lib/models/place.dart`
@@ -142,7 +142,7 @@ class Place {
 
 ---
 
-### 📦 Paso 2: Repositorio de datos dinámico `PlaceStore`
+### Paso 2: Repositorio de datos dinámico `PlaceStore`
 
 **Ruta del archivo:**
 `lib/data/place_store.dart`
@@ -176,7 +176,7 @@ class PlaceStore extends ChangeNotifier {
 
 ---
 
-### 📝 Paso 3: Pantalla para registrar nuevos lugares (`AddPlaceScreen`)
+### Paso 3: Pantalla para registrar nuevos lugares (`AddPlaceScreen`)
 
 Esta pantalla permite al usuario agregar un nuevo lugar. Contiene un formulario con campos de texto para el nombre y la descripción. Al presionar el botón “Guardar”, se actualiza el repositorio y se retorna a la pantalla principal.
 
@@ -254,7 +254,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
 
 ---
 
-### 🧩 Paso 4: Componente visual reutilizable (`PlaceRow`)
+### Paso 4: Componente visual reutilizable (`PlaceRow`)
 
 Este widget representa visualmente un lugar individual. Se utiliza dentro de la pantalla principal para mostrar la lista de lugares.
 
@@ -286,7 +286,7 @@ class PlaceRow extends StatelessWidget {
 
 ---
 
-### 🏠 Paso 5: Pantalla principal (`HomeScreen`)
+### Paso 5: Pantalla principal (`HomeScreen`)
 
 Esta pantalla muestra el título de la App y la lista completa de lugares. Utiliza `Consumer` para observar el repositorio `PlaceStore` y renderiza la interfaz con un botón flotante para agregar lugares.
 
@@ -337,7 +337,7 @@ class HomeScreen extends StatelessWidget {
 
 ---
 
-### 🏁 Paso 6: Punto de entrada (`main.dart`)
+### Paso 6: Punto de entrada (`main.dart`)
 
 Este archivo configura la aplicación, registra el proveedor `PlaceStore` usando `ChangeNotifierProvider` y define la pantalla inicial (`HomeScreen`).
 
