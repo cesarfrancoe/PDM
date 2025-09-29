@@ -13,7 +13,6 @@ A continuación se detallan los requisitos recomendados por sistema operativo pa
 * macOS 12 o superior
 * Android Studio (versión 2023.1.1 o superior recomendada)
 * Xcode instalado (incluye el simulador de iOS)
-* Plugin **Kotlin Multiplatform** habilitado en Android Studio
 * Simulador de iOS disponible (se puede activar desde Xcode > Preferences > Components)
 * Emulador de Android configurado y funcional
 * Java 17 o superior correctamente instalado
@@ -27,7 +26,6 @@ A continuación se detallan los requisitos recomendados por sistema operativo pa
 
 * Windows 10 o superior
 * Android Studio (versión 2023.1.1 o superior recomendada)
-* Plugin **Kotlin Multiplatform** habilitado en Android Studio
 * Emulador de Android configurado y funcional
 * Java 17 o superior correctamente instalado
 * SDK de Android y Kotlin configurados
@@ -40,7 +38,6 @@ A continuación se detallan los requisitos recomendados por sistema operativo pa
 
 * Distribución moderna (por ejemplo, Ubuntu 22.04, Fedora 38, etc.)
 * Android Studio (versión 2023.1.1 o superior recomendada)
-* Plugin **Kotlin Multiplatform** habilitado en Android Studio
 * Emulador de Android funcional (requiere KVM o VirtualBox)
 * Java 17 o superior correctamente instalado
 * SDK de Android y Kotlin configurados
