@@ -154,7 +154,7 @@ DELETE /api/items/{id}
 
 ---
 
-## Temáticas sugeridas (elegir una)
+## Temáticas sugeridas
 
 1. Gestión de eventos académicos
 2. Citas médicas universitarias
