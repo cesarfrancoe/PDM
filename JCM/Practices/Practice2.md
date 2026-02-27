@@ -197,8 +197,7 @@ composeApp/
             └── org/
                 └── example/
                     └── favoriteplacespro/
-                        └── android/
-                            └── ui/     ← Aquí van HomeScreen.kt, AddPlaceScreen.kt, PlaceRow.kt
+                        └── ui/     ← Aquí van HomeScreen.kt, AddPlaceScreen.kt, PlaceRow.kt
 ```
 
 > Las carpetas pueden crearse directamente desde Android Studio (New > Package) o desde el explorador de archivos.
