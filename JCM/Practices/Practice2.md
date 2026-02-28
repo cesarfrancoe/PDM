@@ -628,7 +628,7 @@ struct HomeView_Previews: PreviewProvider {
 `composeApp/src/main/java/org/example/favoriteplacespro/MainActivity.kt`
 
 ```kotlin
-package org.example.favoriteplacespro.android
+package org.example.favoriteplacespro
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -636,7 +636,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import org.example.favoriteplacespro.android.ui.HomeScreen
+import org.example.favoriteplacespro.ui.HomeScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
