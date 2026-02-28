@@ -131,7 +131,7 @@ En Android Studio, en la barra superior:
 
 Seleccionar el módulo composeApp.
 
-Seleccionar un emulador Android disponible (por ejemplo, Pixel 3 API 10).
+Seleccionar un emulador Android disponible (por ejemplo, Pixel 3 API 30).
 
 3. Ejecutar la aplicación
    
