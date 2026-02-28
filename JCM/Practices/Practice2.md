@@ -433,10 +433,10 @@ Este componente se utiliza dentro de `HomeScreen` (en Android) y `HomeView` (en 
 #### Android – `PlaceRow.kt`
 
 **Ruta del archivo:**
-`composeApp/src/main/java/org/example/favoriteplacespro/android/ui/PlaceRow.kt`
+`composeApp/src/main/java/org/example/favoriteplacespro/ui/PlaceRow.kt`
 
 ```kotlin
-package org.example.favoriteplacespro.android.ui
+package org.example.favoriteplacespro.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
