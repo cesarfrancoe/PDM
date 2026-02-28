@@ -121,6 +121,33 @@ FavoritePlacesPro/
 
 ---
 
+## Prueba de ejecución en Android
+
+Realiza una primera verificación para comprobar que el proyecto base compila y corre correctamente en Android.
+
+1. Seleccionar el módulo Android
+
+En Android Studio, en la barra superior:
+
+Seleccionar el módulo composeApp.
+
+Seleccionar un emulador Android disponible (por ejemplo, Pixel 3 API 10).
+
+3. Ejecutar la aplicación
+   
+Presionar el botón Run (▶).
+
+Android Studio:
+
+Compilará el módulo Android.
+
+Generará el APK.
+
+Lanzará el emulador.
+
+Instalará y ejecutará la aplicación.
+
+
 ## Convención de nombres y organización del código por plataforma
 
 Dado que la interfaz gráfica se implementa por separado en cada sistema operativo, se recomienda seguir una convención de nombres coherente en cada plataforma para mantener el código organizado y comprensible.
