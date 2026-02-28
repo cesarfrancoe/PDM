@@ -121,9 +121,9 @@ FavoritePlacesPro/
 
 ---
 
-## Prueba de ejecución en Android
+## Prueba de ejecución en el emulador de Android
 
-Realiza una primera verificación para comprobar que el proyecto base compila y corre correctamente en Android.
+Para comprobar que el proyecto base compila y corre correctamente en el emulador Android.
 
 1. Seleccionar el módulo Android
 
@@ -139,7 +139,29 @@ Presionar el botón Run (▶).
 
 Android Studio:
 
-Compilará el módulo Android, generará el APK, lanzará el emulador, instalará y ejecutará la aplicación.
+Compilará el módulo Android, generará el APK, lo tranferirá y lanzará el emulador, instalará y ejecutará la aplicación.
+
+## Prueba de ejecución en simulador de iOS
+
+Para comprobar que el proyecto base compila y corre correctamente en el simulador de iOS.
+
+1. Seleccionar el módulo iOS
+
+En Android Studio, en la barra superior:
+
+Seleccionar el módulo iosApp.
+
+Seleccionar un simulador de iOS disponible (por ejemplo, iPhone XR - iOS 18.6).
+
+Nota: si no ve un similador de iOS debe verificar la siguiente configuración...
+
+3. Ejecutar la aplicación
+   
+Presionar el botón Run (▶).
+
+Android Studio:
+
+Compilará el módulo iOS, generará el app lo transferirá y lanzará en el simulador, instalará y ejecutará la aplicación.
 
 
 ## Convención de nombres y organización del código por plataforma
@@ -252,7 +274,7 @@ Este repositorio mantiene una lista observable de lugares mediante un `StateFlow
 
 Antes de implementar `PlaceStore`, es importante tener en cuenta que este repositorio utiliza **corutinas** y `StateFlow`. Por lo tanto, es necesario realizar una configuración previa en el módulo `shared`.
 
-#### 📌 Configuración previa para usar corutinas (versión moderna con `libs.versions.toml`)
+#### Configuración previa para usar corutinas (versión moderna con `libs.versions.toml`)
 
 1. Abre el archivo `libs.versions.toml` (ubicado usualmente en `gradle/libs.versions.toml`) y agrega lo siguiente:
 
