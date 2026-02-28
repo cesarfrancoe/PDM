@@ -432,6 +432,24 @@ Este componente se utiliza dentro de `HomeScreen` (en Android) y `HomeView` (en 
 
 #### Android – `PlaceRow.kt`
 
+Abre el archivo `libs.versions.toml` (ubicado usualmente en `gradle/libs.versions.toml`) y agrega lo siguiente:
+
+```toml
+[versions]
+composeMultiplatform = "1.10.0"
+
+[libraries]
+compose-material-icons-extended = { module = "org.jetbrains.compose.material:material-icons-extended", version.ref = "composeMultiplatform" }
+```
+
+Agregar al archivo composeApp/build.gradle.kts
+
+```kotlin
+androidMain.dependencies {
+    implementation(libs.compose.material.icons.extended)
+}
+```
+
 **Ruta del archivo:**
 `composeApp/src/main/java/org/example/favoriteplacespro/ui/PlaceRow.kt`
 
