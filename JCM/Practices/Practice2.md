@@ -139,13 +139,7 @@ Presionar el botón Run (▶).
 
 Android Studio:
 
-Compilará el módulo Android.
-
-Generará el APK.
-
-Lanzará el emulador.
-
-Instalará y ejecutará la aplicación.
+Compilará el módulo Android, generará el APK, lanzará el emulador, instalará y ejecutará la aplicación.
 
 
 ## Convención de nombres y organización del código por plataforma
