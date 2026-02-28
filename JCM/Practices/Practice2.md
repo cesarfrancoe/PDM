@@ -311,7 +311,7 @@ Estas pantallas permiten al usuario ingresar el nombre y la descripción de un n
 `composedApp/src/main/java/org/example/favoriteplacespro/ui/AddPlaceScreen.kt`
 
 ```kotlin
-package org.example.favoriteplacespro.android.ui
+package org.example.favoriteplacespro.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
