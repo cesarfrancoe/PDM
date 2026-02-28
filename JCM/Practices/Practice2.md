@@ -10,13 +10,13 @@ A continuación se detallan los requisitos recomendados por sistema operativo pa
 
 ### Para usuarios de macOS
 
-* macOS 12 o superior
-* Android Studio (versión 2023.1.1 o superior recomendada)
-* Xcode instalado (versión 14 o superior)
+* macOS 14 o superior
+* Android Studio (versión 2025.3.1 o superior recomendada)
+* Xcode instalado (versión 15 o superior)
 * Plugin **Kotlin Multiplatform** habilitado en Android Studio
 * Simulador de iOS disponible (Xcode > Preferences > Components)
 * Emulador de Android configurado y funcional
-* Java 17 o superior correctamente instalado
+* OpenJDK 21 o superior correctamente instalado
 * SDK de Android y Kotlin configurados
 * Swift configurado (preinstalado con Xcode)
 
@@ -27,10 +27,10 @@ A continuación se detallan los requisitos recomendados por sistema operativo pa
 ### Para usuarios de Windows
 
 * Windows 10 o superior
-* Android Studio (versión 2023.1.1 o superior recomendada)
+* Android Studio (versión 2025.3.1 o superior recomendada)
 * Plugin **Kotlin Multiplatform** habilitado en Android Studio
 * Emulador de Android configurado y funcional
-* Java 17 o superior correctamente instalado
+* OpenJDK 21 o superior correctamente instalado
 * SDK de Android y Kotlin configurados
 
 **Nota:** esta configuración permite desarrollar y probar únicamente la parte Android de la aplicación. No es posible compilar ni ejecutar el módulo iOS (`iosApp`) desde Windows.
@@ -42,10 +42,10 @@ A continuación se detallan los requisitos recomendados por sistema operativo pa
 ### Para usuarios de distribuciones Linux
 
 * Distribución moderna (por ejemplo, Ubuntu 22.04, Fedora 38, etc.)
-* Android Studio (versión 2023.1.1 o superior recomendada)
+* Android Studio (versión 2025.3.1 o superior recomendada)
 * Plugin **Kotlin Multiplatform** habilitado en Android Studio
 * Emulador de Android funcional (requiere KVM o VirtualBox)
-* Java 17 o superior correctamente instalado
+* OpenJDK 21 o superior correctamente instalado
 * SDK de Android y Kotlin configurados
 
 **Nota:** esta configuración permite desarrollar y probar únicamente la parte Android de la aplicación. No es posible compilar ni ejecutar el módulo iOS en sistemas Linux.
