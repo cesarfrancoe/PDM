@@ -491,10 +491,10 @@ struct PlaceRow: View {
 #### Android – `HomeScreen.kt` con FAB y `Scaffold`
 
 **Ruta del archivo:**
-`composeApp/src/main/java/org/example/favoriteplacespro/android/ui/HomeScreen.kt`
+`composeApp/src/main/java/org/example/favoriteplacespro/ui/HomeScreen.kt`
 
 ```kotlin
-package org.example.favoriteplacespro.android.ui
+package org.example.favoriteplacespro.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -606,7 +606,7 @@ struct HomeView_Previews: PreviewProvider {
 #### Android – `MainActivity.kt`
 
 **Ruta del archivo:**
-`composeApp/src/main/java/org/example/favoriteplacespro/android/MainActivity.kt`
+`composeApp/src/main/java/org/example/favoriteplacespro/MainActivity.kt`
 
 ```kotlin
 package org.example.favoriteplacespro.android
