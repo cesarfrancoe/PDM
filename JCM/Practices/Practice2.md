@@ -122,20 +122,21 @@ FavoritePlacesPro/
 
 Para comprobar que el proyecto base compila y corre correctamente en el simulador de iOS.
 
-1. En Android Studio, seleccionar el módulo `iosApp`.
-
-2. Seleccionar un simulador disponible (por ejemplo, **iPhone XR – iOS 18.x**).
-
-Si no aparece ningún simulador en la lista, verificar lo siguiente:
-
 ### Verificación 1: Targets iOS en `shared/build.gradle.kts`
 
 En el bloque `kotlin {}` deben estar declarados los tres targets:
 
 ```kotlin
-iosX64()
-iosArm64()
-iosSimulatorArm64()
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach { iosTarget ->
+        iosTarget.binaries.framework {
+            baseName = "Shared"
+            isStatic = true
+        }
+    }
 ```
 
 * `iosX64()` es obligatorio en equipos con procesador Intel.
@@ -156,6 +157,10 @@ Debe estar configurado en:
 ```
 Standard Architectures 
 ```
+
+1. En Android Studio, seleccionar el módulo `iosApp`.
+
+2. Seleccionar un simulador disponible (por ejemplo, **iPhone XR – iOS 18.x**).
 
 3. Presionar el botón **Run (▶)**.
 
