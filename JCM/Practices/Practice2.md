@@ -395,7 +395,7 @@ kotlin {
 #### Android – `AddPlaceScreen.kt`
 
 **Ruta del archivo:**
-`composedApp/src/main/java/org/example/favoriteplacespro/ui/AddPlaceScreen.kt`
+`composedApp/src/androidMain/kotlin/org/example/favoriteplacespro/ui/AddPlaceScreen.kt`
 
 ```kotlin
 package org.example.favoriteplacespro.ui
@@ -520,7 +520,7 @@ Este componente se utiliza dentro de `HomeScreen` (en Android) y `HomeView` (en 
 #### Android – `PlaceRow.kt`
 
 **Ruta del archivo:**
-`composeApp/src/main/java/org/example/favoriteplacespro/ui/PlaceRow.kt`
+`composeApp/src/androidMain/kotlin/org/example/favoriteplacespro/ui/PlaceRow.kt`
 
 ```kotlin
 package org.example.favoriteplacespro.ui
@@ -579,7 +579,7 @@ struct PlaceRow: View {
 #### Android – `HomeScreen.kt` con FAB y `Scaffold`
 
 **Ruta del archivo:**
-`composeApp/src/main/java/org/example/favoriteplacespro/ui/HomeScreen.kt`
+`composeApp/src/androidMain/kotlin/org/example/favoriteplacespro/ui/HomeScreen.kt`
 
 ```kotlin
 package org.example.favoriteplacespro.ui
@@ -694,7 +694,7 @@ struct HomeView_Previews: PreviewProvider {
 #### Android – `MainActivity.kt`
 
 **Ruta del archivo:**
-`composeApp/src/main/java/org/example/favoriteplacespro/MainActivity.kt`
+`composeApp/src/androidMain/kotlin/org/example/favoriteplacespro/MainActivity.kt`
 
 ```kotlin
 package org.example.favoriteplacespro
