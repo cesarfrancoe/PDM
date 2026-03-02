@@ -125,23 +125,44 @@ FavoritePlacesPro/
 
 Para comprobar que el proyecto base compila y corre correctamente en el simulador de iOS.
 
-1. Seleccionar el módulo iOS
+1. En Android Studio, seleccionar el módulo `iosApp`.
 
-En Android Studio, en la barra superior:
+2. Seleccionar un simulador disponible (por ejemplo, **iPhone XR – iOS 18.x**).
 
-Seleccionar el módulo iosApp.
+Si no aparece ningún simulador en la lista, verificar lo siguiente:
 
-Seleccionar un simulador de iOS disponible (por ejemplo, iPhone XR - iOS 18.6).
+### Verificación 1: Targets iOS en `shared/build.gradle.kts`
 
-Nota: si no ve un similador de iOS debe verificar la siguiente configuración...
+En el bloque `kotlin {}` deben estar declarados los tres targets:
 
-3. Ejecutar la aplicación
-   
-Presionar el botón Run (▶).
+```kotlin
+iosX64()
+iosArm64()
+iosSimulatorArm64()
+```
 
-Android Studio:
+* `iosX64()` es obligatorio en equipos con procesador Intel.
+* `iosSimulatorArm64()` es obligatorio en equipos Apple Silicon.
 
-Compilará el módulo iOS, generará el app lo transferirá y lanzará en el simulador, instalará y ejecutará la aplicación.
+Si falta alguno, el simulador no será reconocido como destino válido.
+
+### Verificación 2: Arquitecturas en Xcode
+
+Abrir `iosApp.xcodeproj` en Xcode.
+
+Ir a:
+
+Target `iosApp` → Build Settings → Architectures
+
+Debe estar configurado en:
+
+```
+Standard Architectures 
+```
+
+3. Presionar el botón **Run (▶)**.
+
+Android Studio compilará, generará y ejecutará la aplicación en el simulador de iOS.
 
 ## Prueba de ejecución en el emulador de Android
 
@@ -161,10 +182,7 @@ Presionar el botón Run (▶).
 
 Android Studio:
 
-Compilará el módulo Android, generará el APK, lo tranferirá y lanzará el emulador, instalará y ejecutará la aplicación.
-
-
-
+Android Studio compilará, generará y ejecutará la aplicación en el emulador de iOS.
 
 ## Convención de nombres y organización del código por plataforma
 
