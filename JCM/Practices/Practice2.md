@@ -10,9 +10,9 @@ A continuación se detallan los requisitos recomendados por sistema operativo pa
 
 ### Para usuarios de macOS
 
-* macOS 14.8.x o superior
+* macOS 14.6 o superior
 * Android Studio (versión 2025.3.1 o superior recomendada)
-* Xcode instalado (versión 16.2.x o superior)
+* Xcode instalado (versión 16.2 o superior)
 * Plugin **Kotlin Multiplatform** instalado en Android Studio
 * Simulador de iOS disponible (Xcode > Preferences > Components)
 * Emulador de Android configurado y funcional
@@ -125,16 +125,11 @@ Para comprobar que el proyecto base compila y corre correctamente en el simulado
 En el bloque `kotlin {}` deben estar declarados los tres targets:
 
 ```kotlin
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach { iosTarget ->
-        iosTarget.binaries.framework {
-            baseName = "Shared"
-            isStatic = true
-        }
-    }
+
+iosX64(),
+iosArm64(),
+iosSimulatorArm64()
+    
 ```
 
 * `iosX64()` es obligatorio en equipos con procesador Intel.
@@ -300,7 +295,7 @@ Antes de implementar `PlaceStore`, es importante tener en cuenta que este reposi
 
 ```toml
 [versions]
-coroutines = "1.8.0"
+coroutines = "1.10.2"
 
 [libraries]
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
@@ -372,7 +367,7 @@ Estas pantallas permiten al usuario ingresar el nombre y la descripción de un n
 
 ```toml
 [versions]
-androidx-compose = "1.7.6"
+androidx-compose = "1.7.8"
 
 [libraries]
 androidx-compose-material-icons = { module = "androidx.compose.material:material-icons-extended", version.ref = "androidx-compose" }
@@ -395,7 +390,7 @@ kotlin {
 #### Android – `AddPlaceScreen.kt`
 
 **Ruta del archivo:**
-`composedApp/src/androidMain/kotlin/org/example/favoriteplacespro/ui/AddPlaceScreen.kt`
+`composeApp/src/androidMain/kotlin/org/example/favoriteplacespro/ui/AddPlaceScreen.kt`
 
 ```kotlin
 package org.example.favoriteplacespro.ui
