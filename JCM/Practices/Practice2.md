@@ -118,7 +118,9 @@ FavoritePlacesPro/
 
 Para comprobar que el proyecto base compila y corre correctamente en el simulador de iOS.
 
-### Verificación 1: Targets iOS en `shared/build.gradle.kts`
+### Verificación 1 (Android Studio):
+
+En Targets iOS en `shared/build.gradle.kts`
 
 En el bloque `kotlin {}` deben estar declarados los tres targets:
 
@@ -138,15 +140,11 @@ Si estás trabajando en un Mac con procesador Intel, debes agregarlo manualmente
 
 Si falta alguno, el simulador no será reconocido como destino válido.
 
-### Verificación 2: Arquitecturas en Xcode
+### Verificación 2: (Xcode)
 
 Abrir `iosApp.xcodeproj` en Xcode.
 
-Ir a:
-
-Target `iosApp` → Build Settings → Architectures
-
-Debe estar configurado en:
+Verifia que en Project Navigator(zona lateral izquierda) → iosApp  → TARGETS → iosApp → Build Settings → Architectures se encuentre configurado en:
 
 `Standard Architectures – $(ARCHS_STANDARD)`
 
