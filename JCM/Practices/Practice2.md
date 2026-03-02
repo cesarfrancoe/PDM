@@ -17,7 +17,7 @@ A continuación se detallan los requisitos recomendados por sistema operativo pa
 * Simulador de iOS disponible (Xcode > Preferences > Components)
 * Emulador de Android configurado y funcional
 
-**Nota:** esta configuración es indispensable para compilar, ejecutar y probar las aplicaciones tanto en Android como en iOS. La UI de iOS se desarrolla directamente en SwiftUI dentro del módulo `iosApp`.
+> **Nota:** esta configuración es indispensable para compilar, ejecutar y probar las aplicaciones tanto en Android como en iOS. La UI de iOS se desarrolla directamente en SwiftUI dentro del módulo `iosApp`.
 
 ---
 
@@ -74,9 +74,7 @@ Para esta práctica se utilizará el generador oficial de JetBrains para crear u
    Android Studio configurará automáticamente los módulos:
 
    * `composeApp` (Jetpack Compose)
-
    * `iosApp` (SwiftUI)
-
    * `shared` (lógica común entre plataformas)
 
    > ⚠️ Si Android Studio sugiere actualizar el **Android Gradle Plugin (AGP)**, selecciona la opción **"Don't ask for this project"** para evitar conflictos con la configuración de Kotlin Multiplatform.
