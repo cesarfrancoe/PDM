@@ -259,7 +259,7 @@ composeApp/
 ```
 iosApp/
 └── iosApp/
-    └── ui/     ← Aquí van HomeView.swif, AddPlaceView.swift, PlaceRow.swift
+    └── ui/     ← Aquí van HomeView.swift, AddPlaceView.swift, PlaceRow.swift
 ```
 ---
 
