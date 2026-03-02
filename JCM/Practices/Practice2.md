@@ -145,7 +145,7 @@ Si falta alguno, el simulador no será reconocido como destino válido.
 
 Abrir `iosApp.xcodeproj` en Xcode.
 
-Verifia que en: Project Navigator(panel izquierdo) → **iosApp**  → sección **TARGETS** → **iosApp** → **Build Settings** → **Architectures** este configurado como:
+Verifia que: Project Navigator (panel izquierdo) → **iosApp**  → sección **TARGETS** → **iosApp** → **Build Settings** → **Architectures** este configurado como:
 
 `Standard Architectures`
 
