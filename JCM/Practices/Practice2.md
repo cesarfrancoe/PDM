@@ -148,7 +148,7 @@ Target `iosApp` → Build Settings → Architectures
 
 Debe estar configurado en:
 
-**Standard Architectures – $(ARCHS_STANDARD)**
+`**Standard Architectures – $(ARCHS_STANDARD)**`
 
 En Android Studio:
 
