@@ -252,7 +252,7 @@ composeApp/
                         └── ui/     ← Aquí van HomeScreen.kt, AddPlaceScreen.kt, PlaceRow.kt
 ```
 
-> Las carpetas pueden crearse directamente desde Android Studio (New > Package) o desde el explorador de archivos.
+> Las carpeta ui puede crearse directamente desde Android Studio (New > Package) o desde el explorador de archivos.
 
 ### En `iosApp` (interfaz de iOS)
 
@@ -261,6 +261,9 @@ iosApp/
 └── iosApp/
     └── ui/     ← Aquí van HomeView.swift, AddPlaceView.swift, PlaceRow.swift
 ```
+
+> La carpeta ui debe crearse directamente desde Xcode utilizando New Group dentro del target iosApp, y no directamente desde el sistema de archivos, para evitar problemas de asociación con el target.
+
 ---
 
 ### Paso 1: Definición del modelo `Place`
