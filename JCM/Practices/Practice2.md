@@ -366,7 +366,31 @@ object PlaceStore {
 
 Estas pantallas permiten al usuario ingresar el nombre y la descripción de un nuevo lugar. Al presionar "Guardar", se agrega a la lista observable a través de `PlaceStore`.
 
----
+#### Configuración previa 
+
+1. Abre el archivo `libs.versions.toml` (ubicado usualmente en `gradle/libs.versions.toml`) y agrega lo siguiente:
+
+```toml
+[versions]
+androidx-compose = "1.7.6"
+
+[libraries]
+androidx-compose-material-icons = { module = "androidx.compose.material:material-icons-extended", version.ref = "androidx-compose" }
+```
+
+> Si estás usando el formato XML (`libs.versions.xml`), agrega estas entradas de forma equivalente en las secciones `[versions]` y `[libraries]`.
+
+2. Luego, abre el archivo `composeApp/build.gradle.kts` y asegúrate de incluir la dependencia en `androidMain`:
+
+```kotlin
+kotlin {
+    sourceSets {
+        androidMain.dependencies {
+            implementation(libs.androidx.compose.material.icons)
+        }
+    }
+}
+```
 
 #### Android – `AddPlaceScreen.kt`
 
