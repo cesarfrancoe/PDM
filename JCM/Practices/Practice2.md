@@ -10,13 +10,12 @@ A continuación se detallan los requisitos recomendados por sistema operativo pa
 
 ### Para usuarios de macOS
 
-* macOS 14 o superior
+* macOS 14.8.x o superior
 * Android Studio (versión 2025.3.1 o superior recomendada)
-* Xcode instalado (versión 15 o superior)
+* Xcode instalado (versión 16.2.x o superior)
 * Plugin **Kotlin Multiplatform** habilitado en Android Studio
 * Simulador de iOS disponible (Xcode > Preferences > Components)
 * Emulador de Android configurado y funcional
-* OpenJDK 21 o superior correctamente instalado
 * SDK de Android y Kotlin configurados
 * Swift configurado (preinstalado con Xcode)
 
@@ -30,7 +29,6 @@ A continuación se detallan los requisitos recomendados por sistema operativo pa
 * Android Studio (versión 2025.3.1 o superior recomendada)
 * Plugin **Kotlin Multiplatform** habilitado en Android Studio
 * Emulador de Android configurado y funcional
-* OpenJDK 21 o superior correctamente instalado
 * SDK de Android y Kotlin configurados
 
 **Nota:** esta configuración permite desarrollar y probar únicamente la parte Android de la aplicación. No es posible compilar ni ejecutar el módulo iOS (`iosApp`) desde Windows.
@@ -45,7 +43,6 @@ A continuación se detallan los requisitos recomendados por sistema operativo pa
 * Android Studio (versión 2025.3.1 o superior recomendada)
 * Plugin **Kotlin Multiplatform** habilitado en Android Studio
 * Emulador de Android funcional (requiere KVM o VirtualBox)
-* OpenJDK 21 o superior correctamente instalado
 * SDK de Android y Kotlin configurados
 
 **Nota:** esta configuración permite desarrollar y probar únicamente la parte Android de la aplicación. No es posible compilar ni ejecutar el módulo iOS en sistemas Linux.
