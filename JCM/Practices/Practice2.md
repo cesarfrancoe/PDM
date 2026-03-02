@@ -118,7 +118,7 @@ FavoritePlacesPro/
 
 ---
 
-## Prueba de ejecución en simulador de iOS
+## Prueba de ejecución en simulador de iOS (solo macOS)
 
 Para comprobar que el proyecto base compila y corre correctamente en el simulador de iOS.
 
