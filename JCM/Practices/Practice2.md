@@ -144,9 +144,9 @@ Si falta alguno, el simulador no será reconocido como destino válido.
 
 Abrir `iosApp.xcodeproj` en Xcode.
 
-Verifia que en Project Navigator(zona lateral izquierda) → iosApp  → TARGETS → iosApp → Build Settings → Architectures se encuentre configurado en:
+Verifia que en: Project Navigator(panel izquierdo) → **iosApp**  → sección **TARGETS** → **iosApp** → **Build Settings** → **Architectures** este configurado como:
 
-`Standard Architectures – $(ARCHS_STANDARD)`
+`Standard Architectures`
 
 En Android Studio:
 
