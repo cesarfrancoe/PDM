@@ -151,9 +151,11 @@ Debe estar configurado en:
 Standard Architectures 
 ```
 
-1. En Android Studio, seleccionar el módulo `iosApp`.
+En Android Studio:
 
-2. Seleccionar un simulador disponible (por ejemplo, **iPhone XR – iOS 18.x**).
+1. Seleccionar el módulo `iosApp` en la barra superior.
+
+2. Seleccionar un simulador disponible (por ejemplo, **iPhone XR – iOS 18**).
 
 3. Presionar el botón **Run (▶)**.
 
@@ -163,20 +165,14 @@ Android Studio compilará, generará y ejecutará la aplicación en el simulador
 
 Para comprobar que el proyecto base compila y corre correctamente en el emulador Android.
 
-1. Seleccionar el módulo Android
+En Android Studio:
 
-En Android Studio, en la barra superior:
+1. Seleccionar el módulo `composeApp`en la barra superior.
 
-Seleccionar el módulo composeApp.
+2. Seleccionar un emulador de Android disponible (por ejemplo, **Pixel 3 API 30**).
 
-Seleccionar un emulador Android disponible (por ejemplo, Pixel 3 API 30).
-
-2. Ejecutar la aplicación
+3. Presionar el botón **Run (▶)**.
    
-Presionar el botón Run (▶).
-
-Android Studio:
-
 Android Studio compilará, generará y ejecutará la aplicación en el emulador de Android.
 
 ## Convención de nombres y organización del código por plataforma
