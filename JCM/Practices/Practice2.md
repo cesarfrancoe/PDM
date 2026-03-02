@@ -135,6 +135,9 @@ iosSimulatorArm64()
 * `iosX64()` es obligatorio en equipos con procesador Intel.
 * `iosSimulatorArm64()` es obligatorio en equipos Apple Silicon.
 
+> **Nota:** en versiones recientes de la plantilla generada por https://kmp.jetbrains.com, iosX64() puede no venir incluido por defecto.
+Si estás trabajando en un Mac con procesador Intel, debes agregarlo manualmente.
+
 Si falta alguno, el simulador no será reconocido como destino válido.
 
 ### Verificación 2: Arquitecturas en Xcode
@@ -148,7 +151,7 @@ Target `iosApp` → Build Settings → Architectures
 Debe estar configurado en:
 
 ```
-Standard Architectures 
+Standard Architectures – $(ARCHS_STANDARD)
 ```
 
 En Android Studio:
