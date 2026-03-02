@@ -576,24 +576,6 @@ struct PlaceRow: View {
 
 ### Pantallas principales con navegación y lista de lugares
 
-Abre el archivo `libs.versions.toml` (ubicado usualmente en `gradle/libs.versions.toml`) y agrega lo siguiente:
-
-```toml
-[versions]
-composeMultiplatform = "1.10.0"
-
-[libraries]
-compose-material-icons-extended = { module = "org.jetbrains.compose.material:material-icons-extended", version.ref = "composeMultiplatform" }
-```
-
-Agregar al archivo composeApp/build.gradle.kts
-
-```kotlin
-androidMain.dependencies {
-    implementation(libs.compose.material.icons.extended)
-}
-```
-
 #### Android – `HomeScreen.kt` con FAB y `Scaffold`
 
 **Ruta del archivo:**
