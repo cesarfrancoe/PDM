@@ -75,9 +75,10 @@ Para esta práctica se utilizará el generador oficial de JetBrains para crear u
 
    * `composeApp` (Jetpack Compose)
    * `iosApp` (SwiftUI)
-   * `shared` (lógica común entre plataformas)  
+   * `shared` (lógica común entre plataformas)
+     
 
-   > ⚠️ Si Android Studio sugiere actualizar el **Android Gradle Plugin (AGP)**, selecciona la opción **"Don't ask for this project"** para evitar conflictos con la configuración de Kotlin Multiplatform.
+> ⚠️ Si Android Studio sugiere actualizar el **Android Gradle Plugin (AGP)**, selecciona la opción **"Don't ask for this project"** para evitar conflictos con la configuración de Kotlin Multiplatform.
 
 ---
 
