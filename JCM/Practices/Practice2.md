@@ -254,6 +254,13 @@ composeApp/
 
 > Las carpetas pueden crearse directamente desde Android Studio (New > Package) o desde el explorador de archivos.
 
+### En `iosApp` (interfaz de iOS)
+
+```
+iosApp/
+└── iosApp/
+    └── ui/     ← Aquí van HomeView.swif, AddPlaceView.swift, PlaceRow.swift
+
 ---
 
 ### Paso 1: Definición del modelo `Place`
@@ -451,7 +458,7 @@ fun AddPlaceScreen(onBack: () -> Unit) {
 #### iOS – `AddPlaceView.swift`
 
 **Ruta del archivo:**
-`iosApp/iosApp/AddPlaceView.swift`
+`iosApp/iosApp/ui/AddPlaceView.swift`
 
 ```swift
 import SwiftUI
@@ -538,7 +545,7 @@ fun PlaceRow(place: Place) {
 #### iOS – `PlaceRow.swift`
 
 **Ruta del archivo:**
-`iosApp/iosApp/PlaceRow.swift`
+`iosApp/iosApp/ui/PlaceRow.swift`
 
 ```swift
 import SwiftUI
@@ -628,7 +635,7 @@ fun loadPlaces(): List<Place> {
 #### iOS – `HomeView.swift` con `NavigationView` y `.sheet`
 
 **Ruta del archivo:**
-`iosApp/iosApp/HomeView.swift`
+`iosApp/iosApp/ui/HomeView.swift`
 
 ```swift
 import SwiftUI
