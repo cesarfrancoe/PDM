@@ -182,7 +182,7 @@ Presionar el botón Run (▶).
 
 Android Studio:
 
-Android Studio compilará, generará y ejecutará la aplicación en el emulador de iOS.
+Android Studio compilará, generará y ejecutará la aplicación en el emulador de Android.
 
 ## Convención de nombres y organización del código por plataforma
 
