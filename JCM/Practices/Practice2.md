@@ -121,26 +121,6 @@ FavoritePlacesPro/
 
 ---
 
-## Prueba de ejecución en el emulador de Android
-
-Para comprobar que el proyecto base compila y corre correctamente en el emulador Android.
-
-1. Seleccionar el módulo Android
-
-En Android Studio, en la barra superior:
-
-Seleccionar el módulo composeApp.
-
-Seleccionar un emulador Android disponible (por ejemplo, Pixel 3 API 30).
-
-3. Ejecutar la aplicación
-   
-Presionar el botón Run (▶).
-
-Android Studio:
-
-Compilará el módulo Android, generará el APK, lo tranferirá y lanzará el emulador, instalará y ejecutará la aplicación.
-
 ## Prueba de ejecución en simulador de iOS
 
 Para comprobar que el proyecto base compila y corre correctamente en el simulador de iOS.
@@ -162,6 +142,28 @@ Presionar el botón Run (▶).
 Android Studio:
 
 Compilará el módulo iOS, generará el app lo transferirá y lanzará en el simulador, instalará y ejecutará la aplicación.
+
+## Prueba de ejecución en el emulador de Android
+
+Para comprobar que el proyecto base compila y corre correctamente en el emulador Android.
+
+1. Seleccionar el módulo Android
+
+En Android Studio, en la barra superior:
+
+Seleccionar el módulo composeApp.
+
+Seleccionar un emulador Android disponible (por ejemplo, Pixel 3 API 30).
+
+3. Ejecutar la aplicación
+   
+Presionar el botón Run (▶).
+
+Android Studio:
+
+Compilará el módulo Android, generará el APK, lo tranferirá y lanzará el emulador, instalará y ejecutará la aplicación.
+
+
 
 
 ## Convención de nombres y organización del código por plataforma
