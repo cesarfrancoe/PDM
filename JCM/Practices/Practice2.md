@@ -171,7 +171,7 @@ Seleccionar el módulo composeApp.
 
 Seleccionar un emulador Android disponible (por ejemplo, Pixel 3 API 30).
 
-3. Ejecutar la aplicación
+2. Ejecutar la aplicación
    
 Presionar el botón Run (▶).
 
