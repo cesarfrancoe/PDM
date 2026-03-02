@@ -260,7 +260,7 @@ composeApp/
 iosApp/
 └── iosApp/
     └── ui/     ← Aquí van HomeView.swif, AddPlaceView.swift, PlaceRow.swift
-
+```
 ---
 
 ### Paso 1: Definición del modelo `Place`
