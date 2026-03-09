@@ -224,6 +224,32 @@ fun HomeScreen(onAdd: () -> Unit) {
 
 Esta pantalla permite al usuario ingresar un nuevo lugar a través de un formulario compuesto por campos de texto para el nombre y la descripción. Al presionar el botón "Guardar", se agrega el nuevo lugar a la lista compartida a través de PlaceStore, y se retorna automáticamente a la pantalla principal.
 
+#### Configuración previa 
+
+1. Abre el archivo `libs.versions.toml` (ubicado usualmente en `gradle/libs.versions.toml`) y agrega lo siguiente:
+
+```toml
+[versions]
+androidx-compose = "1.7.8"
+
+[libraries]
+androidx-compose-material-icons = { module = "androidx.compose.material:material-icons-extended", version.ref = "androidx-compose" }
+```
+
+> Si estás usando el formato XML (`libs.versions.xml`), agrega estas entradas de forma equivalente en las secciones `[versions]` y `[libraries]`.
+
+2. Luego, abre el archivo `composeApp/build.gradle.kts` y asegúrate de incluir la dependencia en `androidMain`:
+
+```kotlin
+kotlin {
+    sourceSets {
+        androidMain.dependencies {
+            implementation(libs.androidx.compose.material.icons)
+        }
+    }
+}
+```
+
 **Ruta del archivo:**
 `composeApp/src/commonMain/kotlin/org/example/favoriteplaces/ui/AddPlaceScreen.kt`
 
