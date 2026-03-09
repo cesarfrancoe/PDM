@@ -80,7 +80,6 @@ Una vez generado y abierto el proyecto en Android Studio, encontrarás una organ
 
 ```
 FavoritePlaces/
-├── androidApp/           ← Aplicación Android
 ├── iosApp/               ← Aplicación iOS (solo compila en macOS)
 └── composeApp/
     ├── build.gradle.kts
