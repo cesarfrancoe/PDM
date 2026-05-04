@@ -74,7 +74,7 @@ Instalar:
 
 * Form Factor: **Phone**
 * Dispositivo: **Pixel 3**
-* Clic: `Next`
+Clic: `Next`
 
 ---
 
@@ -103,7 +103,7 @@ En la pantalla **Configure virtual device**:
 
 ### 6.1 Pestaña: Device
 
-* Name: **Pixel 3**
+* Name: **Pixel 3 API 29**
 * Orientation: **Portrait**
 * Default Boot: **Cold**
 
