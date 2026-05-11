@@ -62,6 +62,7 @@ Para evitar configuraciones adicionales en el primer arranque:
 1. Abrir Xcode desde Launchpad o Spotlight
 2. Aceptar los términos de licencia
 3. Instalar los runtime adicionales requeridos (por ejemplo el runtime de iOS)
+4. Cree el dispositivo requerido (Ejemplo: iPhone Xr iOS 18.x o iPhone XX iOS 26) y elimine los que no necesite para liberar recursos.
 
 ---
 
