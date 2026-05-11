@@ -55,26 +55,13 @@ Para evitar configuraciones adicionales en el primer arranque:
    ```
    xcode-select --install
    ```
-3. Seleccionar la versión activa de Xcode (si aplica):
-
-   ```
-   sudo xcode-select -s /Applications/Xcode.app
-   ```
-4. Descargar el runtime de iOS:
-
-   ```
-   xcodebuild -downloadPlatform iOS
-   ```
-
-Este último comando permite tener listo el simulador sin necesidad de abrir Xcode.
-
 ---
 
 ### Primera ejecución
 
 1. Abrir Xcode desde Launchpad o Spotlight
 2. Aceptar los términos de licencia
-3. Verificar que no se requieran descargas adicionales
+3. Instalar los runtime adicionales requeridos (por ejemplo el runtime de iOS)
 
 ---
 
