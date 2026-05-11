@@ -2,6 +2,8 @@
 
 El simulador de iOS es una herramienta que permite ejecutar y probar aplicaciones móviles sin necesidad de un dispositivo físico. Está integrado en Xcode y facilita el desarrollo al ofrecer distintos modelos de iPhone y versiones de iOS para validar interfaces y funcionalidades básicas.
 
+Tanto Xcode como el iOS Simulator únicamente pueden ejecutarse en macOS.
+
 **Nota:** Antes de continuar, asegúrese de tener Xcode correctamente instalado. La guía de instalación se encuentra disponible en:
 
 [Guía de instalación de Xcode](https://github.com/cesarfrancoe/PDM/blob/main/Tools/Xcode/README.md)
@@ -14,13 +16,15 @@ Abre Xcode y accede al gestor de dispositivos desde el menú **Window → Device
 
 Para optimizar el consumo de recursos, se recomienda utilizar preferiblemente la siguiente configuración:
 
-* Dispositivo: iPhone XR
+* Dispositivo: iPhone Xʀ
 * Sistema operativo: iOS 18.x
 
 Si esta configuración no se encuentra disponible o se requiere compatibilidad con versiones recientes de iOS, se recomienda utilizar:
 
 * Dispositivo: iPhone 14
 * Sistema operativo: iOS 26.x
+
+**Nota:** iOS 26 no es compatible con iPhone Xʀ.
 
 Si la versión de iOS no aparece disponible, debes descargarla previamente desde **Xcode → Settings → Platforms**.
 
