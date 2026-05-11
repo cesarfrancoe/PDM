@@ -18,9 +18,9 @@ Xcode es el entorno oficial de desarrollo de Apple para crear aplicaciones iOS, 
 * Sistema operativo: macOS Ventura o superior
 * Conexión a internet
 
-Referencia de compatibilidad (versiones recientes):
+Referencia de compatibilidad:
 
-| macOS (versión exacta) | Versión de Xcode soportada |
+| macOS                  | Versión de Xcode soportada |
 | ---------------------- | -------------------------- |
 | Sonoma (14.7.x)        | Xcode 16.2                 |
 | Sequoia (15.6.x)       | Xcode 16.4 y Xcode 26.3    |
@@ -53,7 +53,13 @@ Para evitar configuraciones adicionales en el primer arranque:
 2. Instalar Command Line Tools:
 
    ```
-   xcode-select --install
+   sudo xcode-select --install
+   ```
+   
+3. Aceptar licencias
+
+   ```
+   sudo xcodebuild -license-acept
    ```
 ---
 
