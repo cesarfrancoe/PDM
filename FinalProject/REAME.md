@@ -8,7 +8,7 @@ Desarrollar una aplicación móvil cliente/servidor orientada al usuario común,
 
 El proyecto debe incluir una aplicación móvil nativa o multiplataforma no híbrida y un backend con base de datos relacional. La conexión entre ambos componentes se podrá realizar directamente en red local o mediante herramientas de túnel (LocalTunnel, ngrok, Expose o similares).
 
-Modalidad de trabajo: individual o grupos de hasta 2 personas.
+Modalidad de trabajo: individual o grupos de hasta 2 estudiantes
 
 ---
 
@@ -26,6 +26,11 @@ Opciones permitidas:
 * Flutter (Dart)
 
 No se permiten frameworks basados en WebViews (Ionic, Cordova, Capacitor, React Native, entre otros).
+
+La aplicación debe ejecutarse tanto en Android como en iOS, ya sea mediante:
+
+* Emuladores o simuladores
+* Dispositivos físicos
 
 La aplicación debe conectarse al backend mediante servicios REST (formato JSON) y presentar:
 
@@ -193,7 +198,7 @@ También se permite utilizar servicios Kubernetes gestionados en la nube.
 
 ## Endpoints mínimos
 
-```text id="cqqf9e"
+```text
 POST   /api/register
 POST   /api/login
 GET    /api/items
@@ -226,7 +231,7 @@ DELETE /api/items/{id}
 * [ ] Base de datos relacional con al menos cinco tablas de dominio
 * [ ] Conexión entre App y backend mediante túnel, red local o despliegue cloud
 * [ ] Opción de despliegue documentada
-* [ ] Aplicación móvil operativa
+* [ ] Aplicación móvil operativa en Android e iOS
 * [ ] Mínimo tres pantallas correspondientes al dominio principal
 * [ ] Documentación con README y endpoints
 * [ ] Video demostrativo de máximo tres minutos
