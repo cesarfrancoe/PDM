@@ -50,7 +50,7 @@ Puedes ejecutar el simulador sin necesidad de abrir o crear un proyecto de las s
 open -a Simulator
 ```
 
-**Nota:** Para facilitar el acceso, puedes anclar el simulador al Dock. Una vez abierto, haz clic derecho sobre el ícono del Simulator en el Dock y selecciona **Options → Keep in Dock**.
+**Nota:** Para facilitar el acceso, puedes anclar el simulador al Dock. Una vez abierto, haz clic derecho sobre el ícono del Simulator en el Dock y selecciona **Optiones → Mantener en el Dock**.
 
 ---
 
