@@ -16,6 +16,8 @@ Modalidad de trabajo: individual o grupos de hasta 2 estudiantes
 
 ### 1. Aplicación móvil (frontend)
 
+La aplicación debe estar orientada exclusivamente a teléfonos inteligentes.
+
 Debe ser nativa o multiplataforma compilada a código nativo, no híbrida.
 
 Opciones permitidas:
@@ -26,6 +28,23 @@ Opciones permitidas:
 * Flutter (Dart)
 
 No se permiten frameworks basados en WebViews (Ionic, Cordova, Capacitor, React Native, entre otros).
+
+Consideraciones según el tipo de desarrollo:
+
+* Si el proyecto se desarrolla de forma nativa:
+
+  * Se deben implementar dos aplicaciones independientes:
+
+    * Una para Android
+    * Una para iOS
+
+* Si el proyecto se desarrolla usando tecnologías multiplataforma nativas:
+
+  * Se utiliza un único código base.
+  * A partir de este código base se deben generar:
+
+    * Una aplicación para Android
+    * Una aplicación para iOS
 
 La aplicación debe ejecutarse tanto en Android como en iOS, ya sea mediante:
 
@@ -39,11 +58,13 @@ Pantallas de autenticación:
 1. Registro
 2. Inicio de sesión
 
-Mínimo tres pantallas correspondientes al dominio principal de la aplicación, por ejemplo:
+Mínimo cinco pantallas correspondientes al dominio principal de la aplicación, por ejemplo:
 
 * Lista de elementos
 * Detalle de elemento
-* Creación o edición de elemento
+* Creación de elemento
+* Edición de elemento
+* Historial, búsqueda, filtros o estadísticas
 
 ---
 
@@ -55,26 +76,35 @@ Puede desarrollarse en:
 * Node.js (Express)
 * Java (Spring Boot)
 * Swift (Vapor)
+* Python (FastAPI, Flask o Django REST Framework)
+* C# / .NET (ASP.NET Core Web API)
+* Otros frameworks backend, previa justificación técnica
 
 Debe incluir:
 
 * Endpoints REST para registro, inicio de sesión y CRUD de una entidad principal.
 * Validación básica de datos en el servidor.
-* Persistencia en una base de datos relacional.
+* Persistencia en una base de datos relacional SQL.
 
 No se requiere implementar roles, paneles de administración ni autenticación avanzada.
 
 ---
 
-### 3. Base de datos relacional
+### 3. Base de datos relacional SQL
 
-Puede usarse:
+El proyecto debe utilizar obligatoriamente un motor de base de datos relacional basado en SQL.
+
+La base de datos puede ejecutarse de forma local o en la nube.
+
+Motores permitidos:
 
 * MySQL
 * MariaDB
 * PostgreSQL
 * Oracle
 * SQL Server
+
+No se permite el uso de motores NoSQL como reemplazo principal de la base de datos del proyecto.
 
 La base de datos debe incluir al menos cinco tablas relacionadas mediante claves foráneas, correspondientes al dominio principal de la aplicación.
 
@@ -110,12 +140,28 @@ Se espera que el modelo relacional refleje adecuadamente las relaciones entre en
 
 ### 4. Conexión entre la App y el Backend
 
+La aplicación móvil debe poder conectarse correctamente al backend desde Android e iOS, tanto en emuladores/simuladores como en dispositivos físicos.
+
+#### Escenario A — Backend ejecutándose localmente
+
 Para permitir el acceso desde el emulador o el dispositivo físico a los servicios del backend, se debe usar una de las siguientes alternativas:
 
 * Configurar el backend en la misma red local y usar la dirección IP del equipo.
 * Exponer el servicio mediante herramientas como LocalTunnel, ngrok o Expose, de modo que el backend sea accesible desde una URL pública temporal.
 
-Cada grupo debe documentar en el archivo README el método usado y las URLs de prueba.
+#### Escenario B — Backend desplegado remotamente
+
+Si el backend se despliega en servicios cloud o servidores remotos:
+
+* La aplicación debe conectarse mediante una URL pública accesible desde Internet.
+* El backend debe estar correctamente configurado para aceptar conexiones externas.
+* Se recomienda el uso de HTTPS cuando la plataforma lo permita.
+
+Cada grupo debe documentar en el archivo README:
+
+* El método de conexión utilizado.
+* Las URLs de prueba del backend.
+* La forma de ejecutar y probar la aplicación.
 
 ---
 
@@ -169,7 +215,11 @@ También se permite utilizar servicios Kubernetes gestionados en la nube.
 
 4. Interfaz móvil funcional
 
-   * Mínimo tres pantallas correspondientes al dominio principal de la aplicación.
+   * Mínimo cinco pantallas correspondientes al dominio principal de la aplicación.
+
+5. Compatibilidad multiplataforma
+
+   * El proyecto debe ejecutarse en Android e iOS.
 
 ---
 
@@ -198,7 +248,7 @@ También se permite utilizar servicios Kubernetes gestionados en la nube.
 
 ## Endpoints mínimos
 
-```text
+```text id="8txx4t"
 POST   /api/register
 POST   /api/login
 GET    /api/items
@@ -228,10 +278,10 @@ DELETE /api/items/{id}
 
 * [ ] Registro e inicio de sesión funcionales
 * [ ] CRUD completo en backend
-* [ ] Base de datos relacional con al menos cinco tablas de dominio
+* [ ] Base de datos relacional SQL local o en la nube con al menos cinco tablas de dominio
 * [ ] Conexión entre App y backend mediante túnel, red local o despliegue cloud
 * [ ] Opción de despliegue documentada
 * [ ] Aplicación móvil operativa en Android e iOS
-* [ ] Mínimo tres pantallas correspondientes al dominio principal
+* [ ] Mínimo cinco pantallas correspondientes al dominio principal
 * [ ] Documentación con README y endpoints
 * [ ] Video demostrativo de máximo tres minutos
