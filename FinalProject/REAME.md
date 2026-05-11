@@ -8,7 +8,7 @@ Desarrollar una aplicación móvil cliente/servidor orientada al usuario común,
 
 El proyecto debe incluir una aplicación móvil nativa o multiplataforma no híbrida y un backend con base de datos relacional. La conexión entre ambos componentes se podrá realizar directamente en red local o mediante herramientas de túnel (LocalTunnel, ngrok, Expose o similares).
 
-Integrantes por equipo: 2 estudiantes
+Modalidad de trabajo: individual o grupos de hasta 2 personas.
 
 ---
 
@@ -17,6 +17,7 @@ Integrantes por equipo: 2 estudiantes
 ### 1. Aplicación móvil (frontend)
 
 Debe ser nativa o multiplataforma compilada a código nativo, no híbrida.
+
 Opciones permitidas:
 
 * Android (Java o Kotlin)
@@ -26,11 +27,18 @@ Opciones permitidas:
 
 No se permiten frameworks basados en WebViews (Ionic, Cordova, Capacitor, React Native, entre otros).
 
-La aplicación debe conectarse al backend mediante servicios REST (formato JSON) y presentar al menos tres pantallas:
+La aplicación debe conectarse al backend mediante servicios REST (formato JSON) y presentar:
 
-1. Registro e inicio de sesión
-2. Lista de elementos
-3. Detalle o formulario de creación o edición
+Pantallas de autenticación:
+
+1. Registro
+2. Inicio de sesión
+
+Mínimo tres pantallas correspondientes al dominio principal de la aplicación, por ejemplo:
+
+* Lista de elementos
+* Detalle de elemento
+* Creación o edición de elemento
 
 ---
 
@@ -55,12 +63,43 @@ No se requiere implementar roles, paneles de administración ni autenticación a
 
 ### 3. Base de datos relacional
 
-Puede usarse **MySQL**, **MariaDB**, **PostgreSQL**, **Oracle** o **SQL Server**.
-Debe incluir al menos tres tablas relacionadas, por ejemplo:
+Puede usarse:
+
+* MySQL
+* MariaDB
+* PostgreSQL
+* Oracle
+* SQL Server
+
+La base de datos debe incluir al menos cinco tablas relacionadas mediante claves foráneas, correspondientes al dominio principal de la aplicación.
+
+Las tablas técnicas o de soporte relacionadas con autenticación y manejo de sesión no cuentan dentro de estas cinco tablas mínimas.
+
+Ejemplos de tablas que no cuentan:
 
 * usuarios
-* sesiones o tokens (opcional)
-* entidad principal (por ejemplo: eventos, tareas o pedidos)
+* sesiones
+* tokens
+* refresh_tokens
+* logs de autenticación
+
+Las cinco tablas mínimas deben pertenecer a la lógica funcional del proyecto. Por ejemplo:
+
+* pedidos
+* productos
+* categorías
+* entregas
+* historial_pedidos
+
+o
+
+* eventos
+* ubicaciones
+* asistentes
+* categorías_evento
+* registros_asistencia
+
+Se espera que el modelo relacional refleje adecuadamente las relaciones entre entidades del dominio de la aplicación.
 
 ---
 
@@ -69,7 +108,7 @@ Debe incluir al menos tres tablas relacionadas, por ejemplo:
 Para permitir el acceso desde el emulador o el dispositivo físico a los servicios del backend, se debe usar una de las siguientes alternativas:
 
 * Configurar el backend en la misma red local y usar la dirección IP del equipo.
-* Exponer el servicio mediante herramientas como LocalTunnel, ngrok o Expose, de modo que el backend sea accesible desde una URL pública temporal (por ejemplo, `https://nombre.loca.lt/api/...`).
+* Exponer el servicio mediante herramientas como LocalTunnel, ngrok o Expose, de modo que el backend sea accesible desde una URL pública temporal.
 
 Cada grupo debe documentar en el archivo README el método usado y las URLs de prueba.
 
@@ -77,22 +116,33 @@ Cada grupo debe documentar en el archivo README el método usado y las URLs de p
 
 ### 5. Opciones de despliegue
 
-El uso de contenedores es opcional. Cada grupo puede elegir una de las siguientes opciones:
-
-**Opción A:** Sin contenedores (entorno local directo)
-
-* El backend se ejecuta directamente en el entorno de desarrollo.
-* Se utiliza LocalTunnel, ngrok o Expose para exponer los endpoints.
-
-**Opción B:** Con contenedores mediante Docker Compose o Podman Compose
+#### Opción A — Docker Compose o Podman Compose
 
 * Servicios recomendados: api, db y adminer (o pgadmin).
-* Ejecución: `docker-compose up` o `podman-compose up`.
+* Ejecución local mediante:
 
-**Opción C:** Con Podman, kind y kubectl
+  * `docker-compose up`
+  * `podman-compose up`
+
+También se permite desplegar los contenedores en servicios cloud compatibles, por ejemplo:
+
+* Render
+* Railway
+* Fly.io
+* AWS
+* Azure
+* Google Cloud
+* Oracle Cloud
+* VPS con Docker o Podman
+
+---
+
+#### Opción B — Podman, kind y kubectl
 
 * Creación de un clúster local con kind.
 * Despliegue mediante `kubectl apply -f` con manifiestos Deployment y Service.
+
+También se permite utilizar servicios Kubernetes gestionados en la nube.
 
 ---
 
@@ -114,7 +164,7 @@ El uso de contenedores es opcional. Cada grupo puede elegir una de las siguiente
 
 4. Interfaz móvil funcional
 
-   * Mínimo tres pantallas conectadas al backend.
+   * Mínimo tres pantallas correspondientes al dominio principal de la aplicación.
 
 ---
 
@@ -131,19 +181,19 @@ El uso de contenedores es opcional. Cada grupo puede elegir una de las siguiente
 
 ## Criterios de evaluación
 
-| Criterio                                                      | Porcentaje |
-| ------------------------------------------------------------- | ---------- |
-| Aplicación móvil (interfaz, flujo y conexión al backend)      | 40 %       |
-| Backend y base de datos                                       | 30 %       |
-| Despliegue o exposición del backend (según la opción elegida) | 15 %       |
-| Documentación técnica (README, diagramas, endpoints)          | 10 %       |
-| Presentación y demostración final                             | 5 %        |
+| Criterio                                                 | Porcentaje |
+| -------------------------------------------------------- | ---------- |
+| Aplicación móvil (interfaz, flujo y conexión al backend) | 40 %       |
+| Backend y base de datos                                  | 30 %       |
+| Despliegue o exposición del backend                      | 15 %       |
+| Documentación técnica (README, diagramas, endpoints)     | 10 %       |
+| Presentación y demostración final                        | 5 %        |
 
 ---
 
 ## Endpoints mínimos
 
-```
+```text id="cqqf9e"
 POST   /api/register
 POST   /api/login
 GET    /api/items
@@ -154,7 +204,7 @@ DELETE /api/items/{id}
 
 ---
 
-## Temáticas sugeridas
+## Temáticas sugeridas (elegir una)
 
 1. Gestión de eventos académicos
 2. Citas médicas universitarias
@@ -173,9 +223,10 @@ DELETE /api/items/{id}
 
 * [ ] Registro e inicio de sesión funcionales
 * [ ] CRUD completo en backend
-* [ ] Base de datos relacional con al menos tres tablas
-* [ ] Conexión entre App y backend mediante túnel o red local
-* [ ] Opción de despliegue seleccionada (A, B o C) documentada
+* [ ] Base de datos relacional con al menos cinco tablas de dominio
+* [ ] Conexión entre App y backend mediante túnel, red local o despliegue cloud
+* [ ] Opción de despliegue documentada
 * [ ] Aplicación móvil operativa
+* [ ] Mínimo tres pantallas correspondientes al dominio principal
 * [ ] Documentación con README y endpoints
 * [ ] Video demostrativo de máximo tres minutos
