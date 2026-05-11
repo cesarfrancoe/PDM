@@ -15,8 +15,8 @@ Xcode es el entorno oficial de desarrollo de Apple para crear aplicaciones iOS, 
 
 **Software:**
 
-* Sistema operativo: macOS Ventura o superior
-* Conexión a internet
+* macOS
+* Xcode
 
 Referencia de compatibilidad:
 
@@ -59,7 +59,7 @@ Para evitar configuraciones adicionales en el primer arranque:
 3. Aceptar licencias
 
    ```
-   sudo xcodebuild -license-acept
+   sudo xcodebuild -license accept
    ```
 ---
 
@@ -68,7 +68,7 @@ Para evitar configuraciones adicionales en el primer arranque:
 1. Abrir Xcode desde Launchpad o Spotlight
 2. Aceptar los términos de licencia
 3. Instalar los runtime adicionales requeridos (por ejemplo el runtime de iOS)
-4. Cree el dispositivo requerido (Ejemplo: iPhone Xr iOS 18.x o iPhone XX iOS 26) y elimine los que no necesite para liberar recursos.
+4. Cree el dispositivo requerido (Ejemplo: iPhone Xʀ con iOS 18.x o iPhone 14 con iOS 26) y elimine los que no necesite para liberar recursos.
 
 ---
 
@@ -79,8 +79,6 @@ En Terminal:
 ```
 xcodebuild -version
 ```
-
----
 
 ### Notas finales
 
