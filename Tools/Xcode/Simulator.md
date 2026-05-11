@@ -34,10 +34,21 @@ Una vez creado el simulador, elimina los dispositivos virtuales que no se estén
 
 ### Ejecución (sin proyecto)
 
-Puedes ejecutar el simulador sin necesidad de abrir o crear un proyecto:
+Puedes ejecutar el simulador sin necesidad de abrir o crear un proyecto de las siguientes formas:
+
+**A) Desde Xcode**
 
 * Menú: **Xcode → Open Developer Tool → Simulator**
-* También puedes buscar **Simulator** desde Spotlight y ejecutarlo directamente
+
+**B) Desde Spotlight**
+
+* Buscar: **Simulator**
+
+**C) Desde la terminal**
+
+```bash
+open -a Simulator
+```
 
 **Nota:** Para facilitar el acceso, puedes anclar el simulador al Dock. Una vez abierto, haz clic derecho sobre el ícono del Simulator en el Dock y selecciona **Options → Keep in Dock**.
 
