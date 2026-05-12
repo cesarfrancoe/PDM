@@ -1,23 +1,8 @@
 # Guía: Instalación de Android SDK
 
-## Introducción
+Android SDK es el conjunto oficial de herramientas proporcionadas por [Android Developers](https://developer.android.com?utm_source=chatgpt.com) para el desarrollo de aplicaciones Android. Este SDK incluye componentes esenciales como herramientas de compilación, plataformas Android, utilidades de depuración, emuladores y herramientas de línea de comandos necesarias para construir, ejecutar y probar aplicaciones en diferentes dispositivos y versiones del sistema operativo Android.
 
-Aquí incluir:
-
-* Qué es Android SDK.
-* Componentes principales:
-
-  * cmdline-tools
-  * platform-tools
-  * build-tools
-  * emulator
-* Qué es `sdkmanager`.
-* Objetivo de la guía.
-* Aclarar que la instalación se realizará sin IDE.
-
-Puedes mencionar Android SDK.
-
----
+En esta guía se describe el proceso de instalación y configuración manual del Android SDK utilizando únicamente las herramientas oficiales de línea de comandos (`cmdline-tools`), sin depender de entornos de desarrollo integrados (IDE). Además, se presentan los pasos necesarios para configurar el SDK en macOS, Linux y Windows, incluyendo la instalación de componentes básicos mediante `sdkmanager`, la configuración de variables de entorno y la verificación del entorno de desarrollo.
 
 # Instalación en macOS
 
@@ -37,7 +22,7 @@ Puedes mencionar Android SDK.
 
 ## Descarga de Android SDK Command-line Tools
 
-[Android SDK Command-line Tools](https://developer.android.com/tools?utm_source=chatgpt.com)
+[Android SDK Command-line Tools](https://developer.android.com/tools)
 
 ## Descomprimir archivo en Descargas
 
@@ -99,8 +84,7 @@ adb --version
 
 ## Descargar Android SDK Command-line Tools
 
-[Android SDK Command-line Tools](https://developer.android.com/tools?utm_source=chatgpt.com)
-
+[Android SDK Command-line Tools](https://developer.android.com/tools)
 
 ## Descomprimir archivo en Descargas
 
@@ -173,7 +157,7 @@ adb --version
 
 ## Descargar Android SDK Command-line Tools
 
-[Android SDK Command-line Tools](https://developer.android.com/tools?utm_source=chatgpt.com)
+[Android SDK Command-line Tools](https://developer.android.com/tools)
 
 ## Descomprimir archivo en Descargas
 
