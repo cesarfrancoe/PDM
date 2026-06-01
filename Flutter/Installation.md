@@ -31,25 +31,27 @@ Esta guía describe el proceso de instalación y configuración de Flutter en ma
 
 * Visual Studio Code **(recomendado)**
 
-  * Editor recomendado para el desarrollo con Flutter.
-  * Requiere instalar las extensiones Flutter y Dart.
+  Editor recomendado para el desarrollo con Flutter. Requiere instalar las extensiones Flutter y Dart.
 
 * Android Studio
 
-  * Incluye Android SDK y Android Emulator.
-  * Guía de creación del emulador Android:
+  Incluye Android SDK y Android Emulator.
 
-    [https://github.com/cesarfrancoe/PDM/blob/main/Tools/AndroidStudio/Emulator.md](https://github.com/cesarfrancoe/PDM/blob/main/Tools/AndroidStudio/Emulator.md)
+  Guía de creación del emulador Android:
+
+  [https://github.com/cesarfrancoe/PDM/blob/main/Tools/AndroidStudio/Emulator.md](https://github.com/cesarfrancoe/PDM/blob/main/Tools/AndroidStudio/Emulator.md)
 
 * Xcode
 
-  * Incluye iOS Simulator.
+  Incluye iOS Simulator.
 
-  * Guía de instalación de Xcode:
+  Guías:
+
+  * Instalación de Xcode:
 
     [https://github.com/cesarfrancoe/PDM/blob/main/Tools/Xcode/README.md](https://github.com/cesarfrancoe/PDM/blob/main/Tools/Xcode/README.md)
 
-  * Guía de creación del simulador iOS:
+  * Creación del simulador iOS:
 
     [https://github.com/cesarfrancoe/PDM/blob/main/Tools/Xcode/Simulator.md](https://github.com/cesarfrancoe/PDM/blob/main/Tools/Xcode/Simulator.md)
 
@@ -133,25 +135,7 @@ sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
 
 ---
 
-## 1.6 Preparación del directorio de instalación
-
-Abrir Terminal y ejecutar:
-
-```bash
-cd ~/Library
-mkdir Development
-cd Development
-```
-
-Ruta final:
-
-```text
-~/Library/Development
-```
-
----
-
-## 1.7 Instalación del SDK de Flutter
+## 1.6 Instalación del SDK de Flutter
 
 ### Descargar Flutter
 
@@ -159,17 +143,49 @@ Descargar el SDK desde:
 
 [https://flutter.dev](https://flutter.dev)
 
-### Extraer Flutter
+Guardar el archivo descargado en la carpeta **Descargas**.
 
-Extraer el SDK en:
+---
+
+### Descomprimir Flutter
+
+Descomprimir el archivo descargado. Como resultado se creará una carpeta llamada:
 
 ```text
-~/Library/Development/flutter
+~/Downloads/flutter
 ```
 
 ---
 
-## 1.8 Configuración del PATH
+### Mover Flutter a la carpeta Library
+
+Abrir Terminal y ejecutar:
+
+```bash
+mv ~/Downloads/flutter ~/Library
+```
+
+Verificar:
+
+```bash
+ls ~/Library/flutter
+```
+
+La ubicación final deberá ser:
+
+```text
+~/Library/flutter
+```
+
+y el ejecutable principal deberá encontrarse en:
+
+```text
+~/Library/flutter/bin/flutter
+```
+
+---
+
+## 1.7 Configuración del PATH
 
 Editar el archivo de configuración de Zsh:
 
@@ -180,7 +196,7 @@ nano ~/.zshrc
 Agregar la siguiente línea:
 
 ```bash
-export PATH="$PATH:$HOME/Library/Development/flutter/bin"
+export PATH="$PATH:$HOME/Library/flutter/bin"
 ```
 
 Aplicar los cambios:
@@ -191,7 +207,7 @@ source ~/.zshrc
 
 ---
 
-## 1.9 Verificación de Flutter
+## 1.8 Verificación de Flutter
 
 Verificar la instalación:
 
@@ -203,7 +219,7 @@ Este comando detecta dependencias faltantes y sugiere acciones correctivas.
 
 ---
 
-## 1.10 Configuración Android
+## 1.9 Configuración Android
 
 Seguir la guía:
 
@@ -218,7 +234,7 @@ En equipos con procesadores Intel:
 
 ---
 
-## 1.11 Verificación final
+## 1.10 Verificación final
 
 ### Ejecutar el simulador iOS desde Terminal
 
@@ -271,6 +287,7 @@ flutter run
 * El emulador Android inicia correctamente.
 * `flutter devices` detecta dispositivos disponibles.
 * La aplicación Flutter se ejecuta correctamente.
+
 
 
 
