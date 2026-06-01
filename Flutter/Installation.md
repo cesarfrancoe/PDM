@@ -1,52 +1,189 @@
-## 1. Requisitos previos
+# Guía de instalación de Flutter
 
-Antes de instalar Flutter, valida lo siguiente:
+# Introducción
 
-### Sistema operativo soportado
+Flutter es un framework de desarrollo multiplataforma que permite crear aplicaciones móviles para Android e iOS a partir de una única base de código utilizando el lenguaje Dart.
 
-* Windows 10/11 (64 bits)
-* macOS (para desarrollo iOS)
-* Linux (Ubuntu recomendado)
+Aunque el código fuente es compartido, el resultado del proceso de compilación son dos aplicaciones independientes: una aplicación Android, distribuida normalmente en formatos `.apk` o `.aab`, y una aplicación iOS, distribuida normalmente en formato `.ipa`. Debido a ello, cada plataforma requiere herramientas específicas para compilar, ejecutar y probar las aplicaciones generadas.
 
-### Espacio y herramientas
+Para Android se requiere el Android SDK, incluido en Android Studio. Para iOS se requiere adicionalmente Xcode, herramienta oficial de Apple disponible únicamente para macOS.
 
-* Al menos 2.5 GB de espacio libre
-* Git instalado (verifica con: `git --version`)
+Es importante tener en cuenta que, aunque Flutter permite desarrollar aplicaciones para Android e iOS desde macOS, Windows y Linux, únicamente macOS permite compilar, ejecutar y probar aplicaciones iOS. Por esta razón, los desarrolladores que necesiten trabajar con dispositivos iPhone o simuladores iOS deben utilizar obligatoriamente un equipo Mac.
+
+Esta guía describe el proceso de instalación y configuración de Flutter en macOS, Windows y Linux, incluyendo las herramientas necesarias para desarrollar, compilar, ejecutar y probar aplicaciones móviles en cada plataforma.
+
+# 1. Instalación en macOS
+
+## 1.1 Requisitos del sistema
+
+### Hardware
+
+* Computadora Apple (Mac)
+* Arquitectura del procesador: Intel x86_64 o Apple Silicon ARM64 (M1, M2, M3, etc.) **(recomendado)**
+* Memoria RAM: 8 GB mínimo o 16 GB **(recomendado)**
+* Almacenamiento disponible: 10 GB mínimo o 20 GB o más **(recomendado)**
+
+### Sistema operativo
+
+* macOS 14 (Sonoma) o superior **(recomendado)**
+
+### Herramientas requeridas
+
+* Visual Studio Code **(recomendado)**
+
+  * Editor recomendado para el desarrollo con Flutter.
+  * Requiere instalar las extensiones Flutter y Dart.
+
+* Android Studio
+
+  * Incluye Android SDK y Android Emulator.
+  * Guía de creación del emulador Android:
+
+    [https://github.com/cesarfrancoe/PDM/blob/main/Tools/AndroidStudio/Emulator.md](https://github.com/cesarfrancoe/PDM/blob/main/Tools/AndroidStudio/Emulator.md)
+
+* Xcode
+
+  * Incluye iOS Simulator.
+
+  * Guía de instalación de Xcode:
+
+    [https://github.com/cesarfrancoe/PDM/blob/main/Tools/Xcode/README.md](https://github.com/cesarfrancoe/PDM/blob/main/Tools/Xcode/README.md)
+
+  * Guía de creación del simulador iOS:
+
+    [https://github.com/cesarfrancoe/PDM/blob/main/Tools/Xcode/Simulator.md](https://github.com/cesarfrancoe/PDM/blob/main/Tools/Xcode/Simulator.md)
+
+* Git
+
+### Medio de ejecución
+
+#### iOS
+
+* Simulador iOS o dispositivo iPhone físico **(recomendado)**
+
+#### Android
+
+* Emulador Android o dispositivo Android físico **(recomendado)**
+
+### Notas importantes
+
+* Permite desarrollo, compilación y ejecución para Android e iOS.
+
+* Los dispositivos físicos son recomendados porque ofrecen mayor rendimiento, pruebas más reales y menor consumo de recursos del equipo de desarrollo.
+
+* El simulador iOS solo funciona en macOS y requiere Xcode.
+
+* Flutter genera aplicaciones Android (`.apk` / `.aab`) y aplicaciones iOS (`.ipa`).
+
+* Visual Studio Code no incluye Android SDK, por lo que se requiere instalar adicionalmente Android Studio o configurar el SDK manualmente.
 
 ---
 
-## 2. Instalación del SDK de Flutter
+## 1.2 Instalación y configuración de Xcode
 
-### Paso 1: Descargar Flutter
+Seguir la guía:
 
-* Ir al sitio oficial: [https://docs.flutter.dev](https://docs.flutter.dev)
-* Descargar el SDK según tu sistema operativo
+[https://github.com/cesarfrancoe/PDM/blob/main/Tools/Xcode/README.md](https://github.com/cesarfrancoe/PDM/blob/main/Tools/Xcode/README.md)
 
-### Paso 2: Descomprimir
+---
 
-* Extraer en una ruta sin espacios ni caracteres especiales
-  Ejemplo recomendado:
+## 1.3 Creación del simulador iOS
 
-  * Windows: `C:\src\flutter`
-  * macOS/Linux: `~/development/flutter`
+Seguir la guía:
 
-### Paso 3: Configurar variables de entorno
+[https://github.com/cesarfrancoe/PDM/blob/main/Tools/Xcode/Simulator.md](https://github.com/cesarfrancoe/PDM/blob/main/Tools/Xcode/Simulator.md)
 
-Agregar Flutter al PATH:
+---
 
-**Windows:**
+## 1.4 Verificación de Xcode
 
-* Editar variables de entorno
-* Agregar: `C:\src\flutter\bin`
-
-**macOS/Linux:**
-Editar el archivo `~/.zshrc` o `~/.bashrc`:
+Verificar instalación:
 
 ```bash
-export PATH="$PATH:$HOME/development/flutter/bin"
+xcode-select -p
 ```
 
-Luego ejecutar:
+Verificar versión:
+
+```bash
+xcodebuild -version
+```
+
+Verificar Command Line Tools:
+
+```bash
+xcode-select --install
+```
+
+---
+
+## 1.5 Configuración básica de Xcode
+
+Aceptar licencia:
+
+```bash
+sudo xcodebuild -license accept
+```
+
+Configurar el directorio de desarrollo:
+
+```bash
+sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+```
+
+---
+
+## 1.6 Preparación del directorio de instalación
+
+Abrir Terminal y ejecutar:
+
+```bash
+cd ~/Library
+mkdir Development
+cd Development
+```
+
+Ruta final:
+
+```text
+~/Library/Development
+```
+
+---
+
+## 1.7 Instalación del SDK de Flutter
+
+### Descargar Flutter
+
+Descargar el SDK desde:
+
+[https://flutter.dev](https://flutter.dev)
+
+### Extraer Flutter
+
+Extraer el SDK en:
+
+```text
+~/Library/Development/flutter
+```
+
+---
+
+## 1.8 Configuración del PATH
+
+Editar el archivo de configuración de Zsh:
+
+```bash
+nano ~/.zshrc
+```
+
+Agregar la siguiente línea:
+
+```bash
+export PATH="$PATH:$HOME/Library/Development/flutter/bin"
+```
+
+Aplicar los cambios:
 
 ```bash
 source ~/.zshrc
@@ -54,129 +191,90 @@ source ~/.zshrc
 
 ---
 
-## 3. Verificación de instalación
+## 1.9 Verificación de Flutter
 
-Ejecutar en terminal:
-
-```bash
-flutter doctor
-```
-
-Este comando diagnostica el entorno y muestra dependencias faltantes.
-
----
-
-## 4. Instalación de Android Studio
-
-Instalar Android Studio:
-
-### Durante la instalación:
-
-* Seleccionar:
-
-  * Android SDK
-  * Android SDK Platform
-  * Android Virtual Device (AVD)
-
-### Configurar:
-
-Abrir Android Studio → More Actions → SDK Manager:
-
-* Instalar:
-
-  * Android SDK (última versión estable)
-  * Android SDK Command-line Tools
-
----
-
-## 5. Configuración de emulador
-
-En Android Studio:
-
-* Ir a **Device Manager**
-* Crear un dispositivo virtual:
-
-  * Modelo recomendado: Pixel 3 o superior
-  * API recomendada: 29 o superior
-
----
-
-## 6. Aceptar licencias
-
-Ejecutar:
-
-```bash
-flutter doctor --android-licenses
-```
-
-Aceptar todas las licencias.
-
----
-
-## 7. Instalación de plugins (IDE)
-
-Si usas Android Studio o VS Code:
-
-### Android Studio:
-
-* Instalar plugins:
-
-  * Flutter
-  * Dart
-
-### VS Code (opcional):
-
-* Extensiones:
-
-  * Flutter
-  * Dart
-
----
-
-## 8. Verificación final
-
-Ejecutar nuevamente:
+Verificar la instalación:
 
 ```bash
 flutter doctor
 ```
 
-El resultado esperado:
-
-* Sin errores críticos
-* Todo en estado `[✓]` o advertencias menores
+Este comando detecta dependencias faltantes y sugiere acciones correctivas.
 
 ---
 
-## 9. Prueba inicial
+## 1.10 Configuración Android
 
-Crear y ejecutar una app de prueba:
+Seguir la guía:
+
+[https://github.com/cesarfrancoe/PDM/blob/main/Tools/AndroidStudio/Emulator.md](https://github.com/cesarfrancoe/PDM/blob/main/Tools/AndroidStudio/Emulator.md)
+
+### Consideración importante
+
+En equipos con procesadores Intel:
+
+* Utilizar imágenes de sistema `x86_64`.
+* Flutter ya no soporta imágenes `x86`.
+
+---
+
+## 1.11 Verificación final
+
+### Ejecutar el simulador iOS desde Terminal
 
 ```bash
-flutter create hello_flutter
-cd hello_flutter
+open -a Simulator
+```
+
+### Ejecutar el emulador Android desde Terminal
+
+Listar emuladores disponibles:
+
+```bash
+emulator -list-avds
+```
+
+Ejecutar un emulador:
+
+```bash
+emulator -avd <NOMBRE_EMULADOR>
+```
+
+### Verificar dispositivos disponibles
+
+```bash
+flutter devices
+```
+
+### Crear un proyecto Flutter
+
+```bash
+flutter create my_app
+```
+
+### Ingresar al proyecto
+
+```bash
+cd my_app
+```
+
+### Ejecutar la aplicación
+
+```bash
 flutter run
 ```
 
-Esto debería lanzar la aplicación en el emulador o dispositivo físico.
+### Resultado esperado
 
----
+* `flutter doctor` no presenta errores críticos.
+* El simulador iOS inicia correctamente.
+* El emulador Android inicia correctamente.
+* `flutter devices` detecta dispositivos disponibles.
+* La aplicación Flutter se ejecuta correctamente.
 
-## 10. (Opcional) Configuración para iOS
 
-Solo en macOS:
 
-* Instalar Xcode desde App Store
-* Ejecutar:
 
-```bash
-sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
-sudo xcodebuild -runFirstLaunch
-```
-
-* Instalar simuladores desde Xcode
-
----
 
 ## Observaciones técnicas
 
